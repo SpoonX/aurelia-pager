@@ -1,4 +1,5 @@
 # Pager
+Pagination / pager module for aurelia.
 
 ## Bindables
 
@@ -90,4 +91,3 @@ Using criteria:
   <pager repository.bind="usersRepository" criteria.bind="{disabled: 0}"></pager>
 <template>
 ```
-
