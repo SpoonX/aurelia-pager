@@ -62,9 +62,17 @@
     "directories": {
       "dist": "dist/amd"
     },
+    "dependencies": {
+      "aurelia-framework": "^1.0.0-beta.1.0.5"
+    },
     "devDependencies": {
-      "aurelia-event-aggregator": "^1.0.0-beta.1.2.1",
-      "aurelia-framework": "^1.0.0-beta.1.0.5",
+      "aurelia-history-browser": "^1.0.0-beta.1.2.1",
+      "aurelia-loader-default": "^1.0.0-beta.1.2.2",
+      "aurelia-templating": "^1.0.0-beta.1.2.7",
+      "aurelia-templating-binding": "^1.0.0-beta.1.2.4",
+      "aurelia-templating-resources": "^1.0.0-beta.1.2.6",
+      "aurelia-templating-router": "^1.0.0-beta.1.2.1",
+      "aurelia-testing": "^0.2.2",
       "babel": "babel-core@^5.8.24",
       "babel-runtime": "^5.8.24",
       "core-js": "^1.1.4"

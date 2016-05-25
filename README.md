@@ -1,5 +1,5 @@
 # Pager
-Pagination / pager module for aurelia.
+Pagination / pager module for aurelia. Works well with aurelia-paged.
 
 ## Bindables
 
@@ -26,15 +26,19 @@ The amount of displaying is `range` * 2 + `current page`
 #### limit (optional)
 This will set the amount of items on a page and will be used to calculate the amount of pages, default is 30.
 
-#### repository (optional)
+#### resource (optional)
 Will override the `pages` option.
 
+###### Using a database
 Fetches the count from the DB using [aurelia-orm](https://github.com/SpoonX/aurelia-orm).
 Expects that the amount of pages is located in the `count` property.
 
+###### Using an array
+Calculates the pages based on the amount of items in the array and the limit.
+
 #### criteria (optional)
-This option only works when `repository` is enabled.
-Parameter gets passed straight to the query field of `repository.count`.
+This option only works when `resource` is enabled and comes from the DB.
+Parameter gets passed straight to the query field of `.count()`.
 
 Example (sailsjs/waterline or express):
 
@@ -45,49 +49,40 @@ Example (sailsjs/waterline or express):
 }
 ```
 
-### Events
-
-## pageChanged
-
-When the current page changes, the event `pageChanged` will be emitted with the following object through the [EventAggregator](https://github.com/aurelia/event-aggregator)
-
-```javascript
-{
-  page: 1
-}
-```
-
-## updateCriteria
-
-It will listen to `updateCriteria`, if emmited it will reload the criteria and to go page 1.
-
-## Example:
-
+## Examples:
 
 ```html
-<template>
-  <require from="./pager"></require>
-
-  <pager pages.bind="$amountOfPages" page.bind="1" pagerange.bind="2"></pager>
-<template>
+<pager pages.bind="$amountOfPages" page.bind="1" pagerange.bind="2"></pager>
 ```
 
-Using a repository:
+Using a resource:
 
-```html
-<template>
-  <require from="./pager"></require>
-
-  <pager repository.bind="exampleRepository"></pager>
-<template>
+```js
+this.localData = [{id: 1, name: 'bob'}, {id: 2, name: 'henk'}, {id: 3, name: 'jan'}];
 ```
 
-Using criteria:
+```html
+<pager resource.bind="localData"></pager>
+```
+
+Using criteria (using [aurelia-orm](https://github.com/SpoonX/aurelia-orm):
+
+```js
+this.dbData = entityManager.getRepository('users');
+```
 
 ```html
-<template>
-  <require from="./pager"></require>
+<pager repository.bind="dbData" criteria.bind="{disabled: 0}"></pager>
+```
 
-  <pager repository.bind="usersRepository" criteria.bind="{disabled: 0}"></pager>
-<template>
+Using together with [aurelia-paged](https://github.com/SpoonX/aurelia-paged):
+
+```html
+<paged resource.bind="localData" data.bind="data" page.bind="page">
+  <div class="user" repeat.for="user of data">
+    ${user.id} - ${user.name}
+  </div>
+</paged>
+
+<pager resource.bind="localData" page.bind="page"></pager>
 ```

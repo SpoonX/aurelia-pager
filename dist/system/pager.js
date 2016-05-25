@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-framework', 'aurelia-event-aggregator'], function (_export, _context) {
+System.register(['aurelia-framework'], function (_export, _context) {
   "use strict";
 
-  var bindable, inject, customElement, EventAggregator, _createClass, _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
+  var bindable, customElement, bindingMode, _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -57,69 +57,69 @@ System.register(['aurelia-framework', 'aurelia-event-aggregator'], function (_ex
   return {
     setters: [function (_aureliaFramework) {
       bindable = _aureliaFramework.bindable;
-      inject = _aureliaFramework.inject;
       customElement = _aureliaFramework.customElement;
-    }, function (_aureliaEventAggregator) {
-      EventAggregator = _aureliaEventAggregator.EventAggregator;
+      bindingMode = _aureliaFramework.bindingMode;
     }],
     execute: function () {
-      _createClass = function () {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ("value" in descriptor) descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-
-        return function (Constructor, protoProps, staticProps) {
-          if (protoProps) defineProperties(Constructor.prototype, protoProps);
-          if (staticProps) defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      }();
-
-      _export('Pager', Pager = (_dec = customElement('pager'), _dec2 = inject(EventAggregator, Element), _dec(_class = _dec2(_class = (_class2 = function () {
-        function Pager(eventAggregator, element) {
+      _export('Pager', Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+        function Pager() {
           _classCallCheck(this, Pager);
 
           _initDefineProp(this, 'page', _descriptor, this);
 
-          _initDefineProp(this, 'pages', _descriptor2, this);
+          _initDefineProp(this, 'pagerange', _descriptor2, this);
 
-          _initDefineProp(this, 'pagerange', _descriptor3, this);
+          _initDefineProp(this, 'limit', _descriptor3, this);
 
-          _initDefineProp(this, 'limit', _descriptor4, this);
+          _initDefineProp(this, 'criteria', _descriptor4, this);
 
-          _initDefineProp(this, 'criteria', _descriptor5, this);
+          _initDefineProp(this, 'resource', _descriptor5, this);
 
-          _initDefineProp(this, 'repository', _descriptor6, this);
-
-          this.element = element;
-          this.eventAg = eventAggregator;
+          _initDefineProp(this, 'pages', _descriptor6, this);
         }
 
         Pager.prototype.attached = function attached() {
-          if (!this.repository) {
-            return this.goToPage(this.page);
+          if (!this.page) {
+            this.page = 1;
           }
 
-          this._subscribeEvents();
-          this._calculatePages();
+          if (this.resource) {
+            return this._calculatePages();
+          }
+
+          this._calculateRange();
+        };
+
+        Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            this.goToPage(newValue);
+          }
+        };
+
+        Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
+          if (newValue && newValue !== oldValue) {
+            this._calculatePages();
+          }
         };
 
         Pager.prototype.nextPage = function nextPage() {
           if (this.page < this.pages) {
-            this.goToPage(++this.page);
+            this.page++;
           }
         };
 
         Pager.prototype.prevPage = function prevPage() {
           if (this.page > 1 && this.page <= this.pages) {
-            this.goToPage(--this.page);
+            this.page--;
           }
+        };
+
+        Pager.prototype.lastPage = function lastPage() {
+          this.page = this.pages;
+        };
+
+        Pager.prototype.firstPage = function firstPage() {
+          this.page = 1;
         };
 
         Pager.prototype.goToPage = function goToPage(page) {
@@ -127,11 +127,7 @@ System.register(['aurelia-framework', 'aurelia-event-aggregator'], function (_ex
             return;
           }
 
-          this.page = page;
-
           this._calculateRange();
-
-          this.eventAg.publish('pageChanged', { page: this.page });
         };
 
         Pager.prototype._calculateRange = function _calculateRange() {
@@ -146,8 +142,8 @@ System.register(['aurelia-framework', 'aurelia-event-aggregator'], function (_ex
             rangeEnd = Math.min(this.pagerange * 2 + 1, this.pages);
           }
 
-          if (this.page < this.pages - this.pagerange) {
-            if (this.pages > this.pagerange) {
+          if (this.page > this.pages - this.pagerange) {
+            if (this.pages < this.pagerange) {
               rangeStart = 1;
             } else {
               rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);
@@ -159,7 +155,7 @@ System.register(['aurelia-framework', 'aurelia-event-aggregator'], function (_ex
               text: i.toString(),
               current: i === this.page,
               load: function load(page) {
-                _this.goToPage(parseInt(page));
+                _this.page = parseInt(page);
               }
             });
           }
@@ -170,100 +166,47 @@ System.register(['aurelia-framework', 'aurelia-event-aggregator'], function (_ex
         Pager.prototype._calculatePages = function _calculatePages() {
           var _this2 = this;
 
-          this.repository.count(this.criteria, true).then(function (result) {
-            _this2.pages = Math.ceil(result.count / _this2.limit);
+          if (Array.isArray(this.resource)) {
+            this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+            return this.goToPage(1);
+          }
 
-            if (_this2.pages < 1) {
-              _this2.pages = 1;
-            }
-
-            return _this2.goToPage(_this2.page);
+          this.resource.count(this.criteria, true).then(function (result) {
+            _this2.pages = Math.ceil(result.count / _this2.limit) || 1;
+            _this2.goToPage(1);
           }).catch(function (error) {
             console.error('Something went wrong.', error);
           });
         };
 
-        Pager.prototype._subscribeEvents = function _subscribeEvents() {
-          var _this3 = this;
-
-          this.eventAg.subscribe('updateCriteria', function (response) {
-            _this3.criteria = response;
-
-            _this3.goToPage(1);
-            _this3._calculatePages();
-          });
-
-          this.eventAg.subscribe('changePage', function (response) {
-            _this3.goToPage(response.page);
-          });
-        };
-
-        _createClass(Pager, [{
-          key: 'page',
-          set: function set(page) {
-            this.goToPage(page);
-          },
-          get: function get() {
-            return this.page;
-          }
-        }, {
-          key: 'pages',
-          set: function set(pages) {
-            this.pages = pages;
-          },
-          get: function get() {
-            return this.pages;
-          }
-        }, {
-          key: 'range',
-          set: function set(range) {
-            this.pagerange = range;
-          },
-          get: function get() {
-            return this.pagerange;
-          }
-        }, {
-          key: 'criteria',
-          set: function set(crit) {
-            this.criteria = crit;
-          },
-          get: function get() {
-            return this.criteria;
-          }
-        }]);
-
         return Pager;
-      }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [bindable], {
+      }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec2, bindable], {
         enumerable: true,
         initializer: function initializer() {
           return 1;
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
-        enumerable: true,
-        initializer: function initializer() {
-          return 1;
-        }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return 3;
         }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return 30;
         }
-      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return {};
         }
-      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'repository', [bindable], {
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [bindable], {
         enumerable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      })), _class2)) || _class) || _class));
+        initializer: null
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+        enumerable: true,
+        initializer: null
+      })), _class2)) || _class));
 
       _export('Pager', Pager);
     }

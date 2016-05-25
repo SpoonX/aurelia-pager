@@ -1,73 +1,58 @@
-import {bindable, inject, customElement} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
+import {bindable, customElement, bindingMode} from 'aurelia-framework';
 
 @customElement('pager')
-@inject(EventAggregator, Element)
 export class Pager {
+  @bindable({defaultBindingMode: bindingMode.twoWay})
 
-  @bindable page       = 1;  // current page
-  @bindable pages      = 1;  // total amount of pages
-  @bindable pagerange  = 3;  // ranges of pages to view e.g "3 4 [5] 6 7"
-  @bindable limit      = 30; // the amount of records on a page
-  @bindable criteria   = {}; // search criteria for repository
-  @bindable repository = null;
-
-  constructor(eventAggregator, element) {
-    this.element = element;
-    this.eventAg = eventAggregator;
-  }
+  @bindable page      = 1;  // current page
+  @bindable pagerange = 3;  // ranges of pages to view e.g "3 4 [5] 6 7"
+  @bindable limit     = 30; // the amount of records on a page
+  @bindable criteria  = {}; // search criteria for DB resource
+  @bindable resource;       // data resource, either a ORM or a array
+  @bindable pages;          // total amount of pages
 
   attached() {
-    if (!this.repository) {
-      return this.goToPage(this.page);
+    if (!this.page) {
+      this.page = 1;
     }
 
-    this._subscribeEvents();
-    this._calculatePages();
+    if (this.resource) {
+      return this._calculatePages();
+    }
+
+    this._calculateRange();
   }
 
-  set page(page) {
-    this.goToPage(page);
+  pageChanged(newValue, oldValue) {
+    if (newValue !== oldValue) {
+      this.goToPage(newValue);
+    }
   }
 
-  set pages(pages) {
-    this.pages = pages;
-  }
-
-  set range(range) {
-    this.pagerange = range;
-  }
-
-  set criteria(crit) {
-    this.criteria = crit;
-  }
-
-  get page() {
-    return this.page;
-  }
-
-  get pages() {
-    return this.pages;
-  }
-
-  get range() {
-    return this.pagerange;
-  }
-
-  get criteria() {
-    return this.criteria;
+  criteriaChanged(newValue, oldValue) {
+    if (newValue && (newValue !== oldValue)) {
+      this._calculatePages();
+    }
   }
 
   nextPage() {
     if (this.page < this.pages) {
-      this.goToPage(++this.page);
+      this.page++;
     }
   }
 
   prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
-      this.goToPage(--this.page);
+      this.page--;
     }
+  }
+
+  lastPage() {
+    this.page = this.pages;
+  }
+
+  firstPage() {
+    this.page = 1;
   }
 
   goToPage(page) {
@@ -75,15 +60,12 @@ export class Pager {
       return;
     }
 
-    this.page = page;
-
     this._calculateRange();
-
-    // notify that the page has changed
-    this.eventAg.publish('pageChanged', {page: this.page});
   }
 
-  // caclulate the amount of pages to show
+  /**
+   * caclulate the amount of pages to show
+   */
   _calculateRange() {
     let rangeStart = Math.max(this.page - this.pagerange, 1);
     let rangeEnd   = Math.min(this.page + this.pagerange, this.pages);
@@ -94,8 +76,8 @@ export class Pager {
       rangeEnd = Math.min(this.pagerange * 2 + 1, this.pages);
     }
 
-    if (this.page < this.pages - this.pagerange) {
-      if (this.pages > this.pagerange) {
+    if (this.page > this.pages - this.pagerange) {
+      if (this.pages < this.pagerange) {
         rangeStart = 1;
       } else {
         rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);
@@ -104,10 +86,10 @@ export class Pager {
 
     for (i = rangeStart; i < rangeEnd + 1; i++) {
       navs.push({
-        text   : (i).toString(),
+        text   : i.toString(),
         current: i === this.page,
-        load   : (page) => {
-          this.goToPage(parseInt(page));
+        load   : page => {
+          this.page = parseInt(page);
         }
       });
     }
@@ -115,32 +97,20 @@ export class Pager {
     this.navs = navs;
   }
 
-  // fetch data from DB to calculate the amount of pages
+  /**
+   * fetch data from DB or given array to calculate the amount of pages
+   */
   _calculatePages() {
-    this.repository.count(this.criteria, true).then(result => {
-      this.pages = Math.ceil(result.count / this.limit);
+    if (Array.isArray(this.resource)) {
+      this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+      return this.goToPage(1);
+    }
 
-      if (this.pages < 1) {
-        this.pages = 1;
-      }
-
-      return this.goToPage(this.page);
+    this.resource.count(this.criteria, true).then(result => {
+      this.pages = Math.ceil(result.count / this.limit) || 1;
+      this.goToPage(1);
     }).catch(error => {
       console.error('Something went wrong.', error);
-    });
-  }
-
-  // subscribe to events
-  _subscribeEvents() {
-    this.eventAg.subscribe('updateCriteria', response => {
-      this.criteria = response;
-
-      this.goToPage(1);
-      this._calculatePages();
-    });
-
-    this.eventAg.subscribe('changePage', response => {
-      this.goToPage(response.page);
     });
   }
 }

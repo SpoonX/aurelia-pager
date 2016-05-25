@@ -43,79 +43,65 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { bindable, inject, customElement } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
+import { bindable, customElement, bindingMode } from 'aurelia-framework';
 
-export let Pager = (_dec = customElement('pager'), _dec2 = inject(EventAggregator, Element), _dec(_class = _dec2(_class = (_class2 = class Pager {
-
-  constructor(eventAggregator, element) {
+export let Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class Pager {
+  constructor() {
     _initDefineProp(this, 'page', _descriptor, this);
 
-    _initDefineProp(this, 'pages', _descriptor2, this);
+    _initDefineProp(this, 'pagerange', _descriptor2, this);
 
-    _initDefineProp(this, 'pagerange', _descriptor3, this);
+    _initDefineProp(this, 'limit', _descriptor3, this);
 
-    _initDefineProp(this, 'limit', _descriptor4, this);
+    _initDefineProp(this, 'criteria', _descriptor4, this);
 
-    _initDefineProp(this, 'criteria', _descriptor5, this);
+    _initDefineProp(this, 'resource', _descriptor5, this);
 
-    _initDefineProp(this, 'repository', _descriptor6, this);
-
-    this.element = element;
-    this.eventAg = eventAggregator;
+    _initDefineProp(this, 'pages', _descriptor6, this);
   }
 
   attached() {
-    if (!this.repository) {
-      return this.goToPage(this.page);
+    if (!this.page) {
+      this.page = 1;
     }
 
-    this._subscribeEvents();
-    this._calculatePages();
+    if (this.resource) {
+      return this._calculatePages();
+    }
+
+    this._calculateRange();
   }
 
-  set page(page) {
-    this.goToPage(page);
+  pageChanged(newValue, oldValue) {
+    if (newValue !== oldValue) {
+      this.goToPage(newValue);
+    }
   }
 
-  set pages(pages) {
-    this.pages = pages;
-  }
-
-  set range(range) {
-    this.pagerange = range;
-  }
-
-  set criteria(crit) {
-    this.criteria = crit;
-  }
-
-  get page() {
-    return this.page;
-  }
-
-  get pages() {
-    return this.pages;
-  }
-
-  get range() {
-    return this.pagerange;
-  }
-
-  get criteria() {
-    return this.criteria;
+  criteriaChanged(newValue, oldValue) {
+    if (newValue && newValue !== oldValue) {
+      this._calculatePages();
+    }
   }
 
   nextPage() {
     if (this.page < this.pages) {
-      this.goToPage(++this.page);
+      this.page++;
     }
   }
 
   prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
-      this.goToPage(--this.page);
+      this.page--;
     }
+  }
+
+  lastPage() {
+    this.page = this.pages;
+  }
+
+  firstPage() {
+    this.page = 1;
   }
 
   goToPage(page) {
@@ -123,11 +109,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = inject(EventAggregato
       return;
     }
 
-    this.page = page;
-
     this._calculateRange();
-
-    this.eventAg.publish('pageChanged', { page: this.page });
   }
 
   _calculateRange() {
@@ -140,8 +122,8 @@ export let Pager = (_dec = customElement('pager'), _dec2 = inject(EventAggregato
       rangeEnd = Math.min(this.pagerange * 2 + 1, this.pages);
     }
 
-    if (this.page < this.pages - this.pagerange) {
-      if (this.pages > this.pagerange) {
+    if (this.page > this.pages - this.pagerange) {
+      if (this.pages < this.pagerange) {
         rangeStart = 1;
       } else {
         rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);
@@ -153,7 +135,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = inject(EventAggregato
         text: i.toString(),
         current: i === this.page,
         load: page => {
-          this.goToPage(parseInt(page));
+          this.page = parseInt(page);
         }
       });
     }
@@ -162,59 +144,42 @@ export let Pager = (_dec = customElement('pager'), _dec2 = inject(EventAggregato
   }
 
   _calculatePages() {
-    this.repository.count(this.criteria, true).then(result => {
-      this.pages = Math.ceil(result.count / this.limit);
+    if (Array.isArray(this.resource)) {
+      this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+      return this.goToPage(1);
+    }
 
-      if (this.pages < 1) {
-        this.pages = 1;
-      }
-
-      return this.goToPage(this.page);
+    this.resource.count(this.criteria, true).then(result => {
+      this.pages = Math.ceil(result.count / this.limit) || 1;
+      this.goToPage(1);
     }).catch(error => {
       console.error('Something went wrong.', error);
     });
   }
-
-  _subscribeEvents() {
-    this.eventAg.subscribe('updateCriteria', response => {
-      this.criteria = response;
-
-      this.goToPage(1);
-      this._calculatePages();
-    });
-
-    this.eventAg.subscribe('changePage', response => {
-      this.goToPage(response.page);
-    });
-  }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [bindable], {
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec2, bindable], {
   enumerable: true,
   initializer: function () {
     return 1;
   }
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 1;
-  }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
   enumerable: true,
   initializer: function () {
     return 3;
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
   enumerable: true,
   initializer: function () {
     return 30;
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
   enumerable: true,
   initializer: function () {
     return {};
   }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'repository', [bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return null;
-  }
-})), _class2)) || _class) || _class);
+  initializer: null
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+  enumerable: true,
+  initializer: null
+})), _class2)) || _class);
