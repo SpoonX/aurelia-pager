@@ -5,6 +5,11 @@ describe('the Pager component', () => {
   let config          = {};
   let nagivationItems = 4;
   let mockItems       = 100;
+  let localTestData   = [
+    {id: 1, name: 'bob'},
+    {id: 2, name: 'henk'},
+    {id: 3, name: 'jan'}
+  ];
   let component;
   let eventArg;
 
@@ -73,18 +78,14 @@ describe('the Pager component', () => {
   });
 
   it('can load data from local resource', done => {
-    let data = [{id: 1, name: 'bob'}, {id: 2, name: 'henk'}, {id: 3, name: 'jan'}];
-
-    component.boundTo(setConfig({resource: data, limit: 1, pagerange: 1})).create().then(() => {
+    component.boundTo(setConfig({resource: localTestData, limit: 1, pagerange: 1})).create().then(() => {
       const navElement = document.querySelector('.pagination').getElementsByTagName('li');
-      expect(navElement.length).toBe(data.length + nagivationItems);
+      expect(navElement.length).toBe(localTestData.length + nagivationItems);
     }).then(done);
   });
 
   it('can change the current page from data loaded by local resource', done => {
-    let data = [{id: 1, name: 'bob'}, {id: 2, name: 'henk'}, {id: 3, name: 'jan'}];
-
-    component.boundTo(setConfig({resource: data, limit: 1, pagerange: 1, page: 2})).create().then(() => {
+    component.boundTo(setConfig({resource: localTestData, limit: 1, pagerange: 1, page: 2})).create().then(() => {
       const navElement = document.querySelector('.active a');
       expect(navElement.innerHTML).toBe(config.page.toString());
     }).then(done);
