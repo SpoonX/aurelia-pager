@@ -79,6 +79,10 @@ define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
         this.page = 1;
       }
 
+      this.reloadCount();
+    };
+
+    Pager.prototype.reloadCount = function reloadCount() {
       if (this.resource) {
         return this._calculatePages();
       }
@@ -93,7 +97,7 @@ define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
     };
 
     Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
-      if (newValue && newValue !== oldValue) {
+      if (this.resource && newValue && newValue !== oldValue) {
         this._calculatePages();
       }
     };

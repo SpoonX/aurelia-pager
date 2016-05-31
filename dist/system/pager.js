@@ -83,6 +83,10 @@ System.register(['aurelia-framework'], function (_export, _context) {
             this.page = 1;
           }
 
+          this.reloadCount();
+        };
+
+        Pager.prototype.reloadCount = function reloadCount() {
           if (this.resource) {
             return this._calculatePages();
           }
@@ -97,7 +101,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
         };
 
         Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
-          if (newValue && newValue !== oldValue) {
+          if (this.resource && newValue && newValue !== oldValue) {
             this._calculatePages();
           }
         };

@@ -65,6 +65,10 @@ export let Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBin
       this.page = 1;
     }
 
+    this.reloadCount();
+  }
+
+  reloadCount() {
     if (this.resource) {
       return this._calculatePages();
     }
@@ -79,7 +83,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBin
   }
 
   criteriaChanged(newValue, oldValue) {
-    if (newValue && newValue !== oldValue) {
+    if (this.resource && newValue && newValue !== oldValue) {
       this._calculatePages();
     }
   }

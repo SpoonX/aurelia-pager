@@ -76,6 +76,10 @@ var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'
       this.page = 1;
     }
 
+    this.reloadCount();
+  };
+
+  Pager.prototype.reloadCount = function reloadCount() {
     if (this.resource) {
       return this._calculatePages();
     }
@@ -90,7 +94,7 @@ var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'
   };
 
   Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
-    if (newValue && newValue !== oldValue) {
+    if (this.resource && newValue && newValue !== oldValue) {
       this._calculatePages();
     }
   };

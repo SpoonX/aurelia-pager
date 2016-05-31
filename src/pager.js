@@ -16,6 +16,10 @@ export class Pager {
       this.page = 1;
     }
 
+    this.reloadCount();
+  }
+
+  reloadCount() {
     if (this.resource) {
       return this._calculatePages();
     }
@@ -30,7 +34,7 @@ export class Pager {
   }
 
   criteriaChanged(newValue, oldValue) {
-    if (newValue && (newValue !== oldValue)) {
+    if (this.resource && newValue && (newValue !== oldValue)) {
       this._calculatePages();
     }
   }
