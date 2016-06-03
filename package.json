@@ -11,7 +11,9 @@
     "pager",
     "spoonx"
   ],
-  "author": "VMBindraban <vijay@spoonx.nl>",
+  "contributors": [
+    "VMBindraban <vijay@spoonx.nl> (http://spoonx.nl)"
+  ],
   "license": "MIT",
   "main": "dist/commonjs/index.js",
   "repository": {
