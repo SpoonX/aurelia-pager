@@ -1,5 +1,4 @@
 System.config({
-  baseUrl: '/',
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -12,6 +11,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+  baseUrl: "/",
 
   map: {
     "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.0.0-beta.1.2.3",

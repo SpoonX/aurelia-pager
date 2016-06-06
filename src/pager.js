@@ -1,6 +1,8 @@
 import {bindable, customElement, bindingMode} from 'aurelia-framework';
+import {resolvedView} from 'aurelia-view-manager';
 
 @customElement('pager')
+@resolvedView('aurelia-pager', 'pager')
 export class Pager {
   @bindable({defaultBindingMode: bindingMode.twoWay})
 
@@ -11,9 +13,6 @@ export class Pager {
   @bindable resource;       // data resource, either a ORM or a array
   @bindable pages;          // total amount of pages
 
-  /**
-   * Attach to view
-   */
   attached() {
     if (!this.page) {
       this.page = 1;
@@ -22,9 +21,6 @@ export class Pager {
     this.reloadCount();
   }
 
-  /**
-   * Public method to update the pager
-   */
   reloadCount() {
     if (this.resource) {
       return this._calculatePages();
@@ -33,65 +29,38 @@ export class Pager {
     this._calculateRange();
   }
 
-  /**
-   * Update changed page
-   *
-   * @param  {integer} newValue New page value
-   * @param  {integer} oldValue Old page value
-   */
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
     }
   }
 
-  /**
-   * Update criteria
-   *
-   * @param  {{}} newValue New criteria
-   * @param  {{}} oldValue Old criteria
-   */
   criteriaChanged(newValue, oldValue) {
     if (this.resource && newValue && (newValue !== oldValue)) {
       this._calculatePages();
     }
   }
 
-  /**
-   * Go to next page
-   */
   nextPage() {
     if (this.page < this.pages) {
       this.page++;
     }
   }
 
-  /**
-   * Go to previous page
-   */
   prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
       this.page--;
     }
   }
 
-  /**
-   * Go to last page
-   */
   lastPage() {
     this.page = this.pages;
   }
 
-  /**
-   * Go to first page
-   */
   firstPage() {
     this.page = 1;
   }
 
-  /**
-   * Go to a page
-   */
   goToPage(page) {
     if (page < 0 || page > this.pages) {
       return;

@@ -1,4 +1,4 @@
-var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -44,8 +44,9 @@ function _initializerWarningHelper(descriptor, context) {
 }
 
 import { bindable, customElement, bindingMode } from 'aurelia-framework';
+import { resolvedView } from 'aurelia-view-manager';
 
-export let Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class Pager {
+export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia-pager', 'pager'), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = class Pager {
   constructor() {
     _initDefineProp(this, 'page', _descriptor, this);
 
@@ -160,7 +161,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBin
       console.error('Something went wrong.', error);
     });
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec2, bindable], {
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, bindable], {
   enumerable: true,
   initializer: function () {
     return 1;
@@ -186,4 +187,4 @@ export let Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBin
 }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
   enumerable: true,
   initializer: null
-})), _class2)) || _class);
+})), _class2)) || _class) || _class);

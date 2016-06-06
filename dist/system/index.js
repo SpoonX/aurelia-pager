@@ -1,13 +1,20 @@
 'use strict';
 
-System.register([], function (_export, _context) {
+System.register(['./config'], function (_export, _context) {
   "use strict";
 
+  var Config;
   return {
-    setters: [],
+    setters: [function (_config) {
+      Config = _config.Config;
+    }],
     execute: function () {
-      function configure(config) {
-        config.globalResources('./pager');
+      function configure(aurelia, cb) {
+        cb = typeof cb === 'function' ? cb : function () {};
+
+        aurelia.globalResources('./pager');
+
+        cb(aurelia.container.get(Config));
       }
 
       _export('configure', configure);

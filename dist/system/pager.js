@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-framework'], function (_export, _context) {
+System.register(['aurelia-framework', 'aurelia-view-manager'], function (_export, _context) {
   "use strict";
 
-  var bindable, customElement, bindingMode, _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
+  var bindable, customElement, bindingMode, resolvedView, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -59,9 +59,11 @@ System.register(['aurelia-framework'], function (_export, _context) {
       bindable = _aureliaFramework.bindable;
       customElement = _aureliaFramework.customElement;
       bindingMode = _aureliaFramework.bindingMode;
+    }, function (_aureliaViewManager) {
+      resolvedView = _aureliaViewManager.resolvedView;
     }],
     execute: function () {
-      _export('Pager', Pager = (_dec = customElement('pager'), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+      _export('Pager', Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia-pager', 'pager'), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
         function Pager() {
           _classCallCheck(this, Pager);
 
@@ -184,7 +186,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
         };
 
         return Pager;
-      }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec2, bindable], {
+      }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, bindable], {
         enumerable: true,
         initializer: function initializer() {
           return 1;
@@ -210,7 +212,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
       }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
         enumerable: true,
         initializer: null
-      })), _class2)) || _class));
+      })), _class2)) || _class) || _class));
 
       _export('Pager', Pager);
     }

@@ -4,6 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.configure = configure;
-function configure(config) {
-  config.globalResources('./pager');
+
+var _config = require('./config');
+
+function configure(aurelia, cb) {
+  cb = typeof cb === 'function' ? cb : function () {};
+
+  aurelia.globalResources('./pager');
+
+  cb(aurelia.container.get(_config.Config));
 }

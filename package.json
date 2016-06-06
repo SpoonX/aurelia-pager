@@ -58,14 +58,15 @@
     "yargs": "^2.1.1"
   },
   "jspm": {
-    "registry": "npm",
+    "registry": "jspm",
     "main": "index",
     "format": "amd",
     "directories": {
       "dist": "dist/amd"
     },
     "dependencies": {
-      "aurelia-framework": "^1.0.0-beta.1.0.5"
+      "aurelia-framework": "^1.0.0-beta.1.0.5",
+      "aurelia-view-manager": "^0.0.3"
     },
     "devDependencies": {
       "aurelia-history-browser": "^1.0.0-beta.1.2.1",

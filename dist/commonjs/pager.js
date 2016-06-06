@@ -5,9 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Pager = undefined;
 
-var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
 
 var _aureliaFramework = require('aurelia-framework');
+
+var _aureliaViewManager = require('aurelia-view-manager');
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -54,7 +56,7 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
   function Pager() {
     _classCallCheck(this, Pager);
 
@@ -177,7 +179,7 @@ var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'
   };
 
   return Pager;
-}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec2, _aureliaFramework.bindable], {
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaFramework.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 1;
@@ -203,4 +205,4 @@ var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'
 }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-})), _class2)) || _class);
+})), _class2)) || _class) || _class);
