@@ -1,9 +1,10 @@
-import { Config } from './config';
+import { Config } from 'aurelia-view-manager';
 
-export function configure(aurelia, cb) {
-  cb = typeof cb === 'function' ? cb : function () {};
+export function configure(aurelia) {
+  aurelia.container.get(Config).configureNamespace('aurelia-pager', {
+    framework: 'bootstrap',
+    location: './{{framework}}/{{view}}.html'
+  });
 
   aurelia.globalResources('./pager');
-
-  cb(aurelia.container.get(Config));
 }

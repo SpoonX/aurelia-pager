@@ -5,12 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.configure = configure;
 
-var _config = require('./config');
+var _aureliaViewManager = require('aurelia-view-manager');
 
-function configure(aurelia, cb) {
-  cb = typeof cb === 'function' ? cb : function () {};
+function configure(aurelia) {
+  aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {
+    framework: 'bootstrap',
+    location: './{{framework}}/{{view}}.html'
+  });
 
   aurelia.globalResources('./pager');
-
-  cb(aurelia.container.get(_config.Config));
 }
