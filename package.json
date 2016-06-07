@@ -1,9 +1,9 @@
 {
-  "name": "aurelia-Pager",
-  "version": "0.0.1",
+  "name": "aurelia-pager",
+  "version": "0.0.2",
   "description": "Aurelia-only pagination",
   "bugs": {
-    "url": "https://github.com/SpoonX/aurelia-Pager/issues"
+    "url": "https://github.com/spoonx/aurelia-pager/issues"
   },
   "keywords": [
     "aurelia",
@@ -18,9 +18,9 @@
   "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SpoonX/aurelia-Pager.git"
+    "url": "git+ssh://git@github.com/spoonx/aurelia-pager.git"
   },
-  "homepage": "https://github.com/SpoonX/aurelia-Pager#readme",
+  "homepage": "https://github.com/spoonx/aurelia-pager#readme",
   "devDependencies": {
     "aurelia-tools": "^0.1.18",
     "babel": "^5.8.23",

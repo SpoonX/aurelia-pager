@@ -1,15 +1,16 @@
-define(['exports', './config'], function (exports, _config) {
+define(['exports', 'aurelia-view-manager'], function (exports, _aureliaViewManager) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.configure = configure;
-  function configure(aurelia, cb) {
-    cb = typeof cb === 'function' ? cb : function () {};
+  function configure(aurelia) {
+    aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {
+      framework: 'bootstrap',
+      location: './{{framework}}/{{view}}.html'
+    });
 
     aurelia.globalResources('./pager');
-
-    cb(aurelia.container.get(_config.Config));
   }
 });

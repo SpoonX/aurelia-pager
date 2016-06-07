@@ -49,6 +49,9 @@ Example (sailsjs/waterline or express):
 }
 ```
 
+## Custom html
+You can override the html with your own by configuring it through the [aurelia-view-manager](https://github.com/spoonx/aurelia-view-manager).
+
 ## Examples:
 
 ```html
