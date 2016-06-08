@@ -1,6 +1,6 @@
 {
   "name": "aurelia-pager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Aurelia-only pagination",
   "bugs": {
     "url": "https://github.com/SpoonX/aurelia-pager/issues"
@@ -66,7 +66,7 @@
     },
     "dependencies": {
       "aurelia-framework": "^1.0.0-beta.1.0.5",
-      "aurelia-view-manager": "^0.0.3"
+      "aurelia-view-manager": "npm:aurelia-view-manager@^0.0.4"
     },
     "devDependencies": {
       "aurelia-history-browser": "^1.0.0-beta.1.2.1",
