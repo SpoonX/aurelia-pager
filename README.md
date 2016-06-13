@@ -1,5 +1,5 @@
 # Pager
-Pagination / pager module for aurelia. Works well with aurelia-paged.
+Pagination / pager module for aurelia. Works well with [aurelia-paged](aurelia-orm.spoonx.org/components.html).
 
 ## Bindables
 
