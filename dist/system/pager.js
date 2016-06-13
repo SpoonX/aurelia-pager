@@ -103,7 +103,7 @@ System.register(['aurelia-framework', 'aurelia-view-manager'], function (_export
         };
 
         Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
-          if (this.resource && newValue && newValue !== oldValue) {
+          if (this.resource && newValue !== oldValue) {
             this._calculatePages();
           }
         };

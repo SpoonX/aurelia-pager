@@ -97,7 +97,7 @@ define(['exports', 'aurelia-framework', 'aurelia-view-manager'], function (expor
     };
 
     Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
-      if (this.resource && newValue && newValue !== oldValue) {
+      if (this.resource && newValue !== oldValue) {
         this._calculatePages();
       }
     };
