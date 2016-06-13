@@ -36,7 +36,7 @@ export class Pager {
   }
 
   criteriaChanged(newValue, oldValue) {
-    if (this.resource && newValue && (newValue !== oldValue)) {
+    if (this.resource && (newValue !== oldValue)) {
       this._calculatePages();
     }
   }

@@ -96,7 +96,7 @@ var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'
   };
 
   Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
-    if (this.resource && newValue && newValue !== oldValue) {
+    if (this.resource && newValue !== oldValue) {
       this._calculatePages();
     }
   };

@@ -84,7 +84,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
   }
 
   criteriaChanged(newValue, oldValue) {
-    if (this.resource && newValue && newValue !== oldValue) {
+    if (this.resource && newValue !== oldValue) {
       this._calculatePages();
     }
   }
