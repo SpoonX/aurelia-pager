@@ -49,9 +49,6 @@ Example (sailsjs/waterline or express):
 }
 ```
 
-## Custom html
-You can override the html with your own by configuring it through the [aurelia-view-manager](https://github.com/spoonx/aurelia-view-manager).
-
 ## Examples:
 
 ```html
@@ -76,16 +73,4 @@ this.dbData = entityManager.getRepository('users');
 
 ```html
 <pager repository.bind="dbData" criteria.bind="{disabled: 0}"></pager>
-```
-
-Using together with [aurelia-paged](https://github.com/SpoonX/aurelia-paged):
-
-```html
-<paged resource.bind="localData" data.bind="data" page.bind="page">
-  <div class="user" repeat.for="user of data">
-    ${user.id} - ${user.name}
-  </div>
-</paged>
-
-<pager resource.bind="localData" page.bind="page"></pager>
 ```
