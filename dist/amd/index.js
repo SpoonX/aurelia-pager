@@ -7,7 +7,6 @@ define(['exports', 'aurelia-view-manager'], function (exports, _aureliaViewManag
   exports.configure = configure;
   function configure(aurelia) {
     aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {
-      framework: 'bootstrap',
       location: './{{framework}}/{{view}}.html'
     });
 
