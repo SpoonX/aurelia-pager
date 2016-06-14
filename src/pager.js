@@ -1,8 +1,7 @@
-import {bindable, customElement, bindingMode} from 'aurelia-framework';
-import {resolvedView} from 'aurelia-view-manager';
+import {bindable, customElement, bindingMode, useView} from 'aurelia-framework';
 
+@useView('./bootstrap/pager.html')
 @customElement('pager')
-@resolvedView('aurelia-pager', 'pager')
 export class Pager {
   @bindable({defaultBindingMode: bindingMode.twoWay})
 
