@@ -149,7 +149,7 @@ System.register(['aurelia-framework', 'aurelia-view-manager'], function (_export
           }
 
           if (this.page > this.pages - this.pagerange) {
-            if (this.pages < this.pagerange) {
+            if (this.pages <= this.pagerange * 2) {
               rangeStart = 1;
             } else {
               rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);

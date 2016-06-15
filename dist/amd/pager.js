@@ -143,7 +143,7 @@ define(['exports', 'aurelia-framework', 'aurelia-view-manager'], function (expor
       }
 
       if (this.page > this.pages - this.pagerange) {
-        if (this.pages < this.pagerange) {
+        if (this.pages <= this.pagerange * 2) {
           rangeStart = 1;
         } else {
           rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);
