@@ -82,8 +82,8 @@ export class Pager {
       rangeEnd = Math.min(this.pagerange * 2 + 1, this.pages);
     }
 
-    if (this.page > this.pages - this.pagerange) {
-      if (this.pages < this.pagerange) {
+    if (this.page > (this.pages - this.pagerange)) {
+      if (this.pages <= (this.pagerange * 2)) {
         rangeStart = 1;
       } else {
         rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);
