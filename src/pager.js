@@ -1,8 +1,10 @@
-import {bindable, customElement, bindingMode} from 'aurelia-framework';
+import {bindable, customElement, bindingMode, inject} from 'aurelia-framework';
 import {resolvedView} from 'aurelia-view-manager';
+import {Config} from './config';
 
 @customElement('pager')
 @resolvedView('aurelia-pager', 'pager')
+@inject(Config)
 export class Pager {
   @bindable({defaultBindingMode: bindingMode.twoWay})
 
@@ -12,6 +14,11 @@ export class Pager {
   @bindable criteria  = {}; // search criteria for DB resource
   @bindable resource;       // data resource, either a ORM or a array
   @bindable pages;          // total amount of pages
+
+  constructor(config) {
+    /* overwrite the defaults for the component */
+    Object.assing(this, config.configurations);
+  }
 
   attached() {
     if (!this.page) {

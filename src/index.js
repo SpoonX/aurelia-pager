@@ -1,4 +1,5 @@
 import {Config} from 'aurelia-view-manager';
+export {Config} from './config';
 
 export function configure(aurelia) {
   aurelia.container.get(Config).configureNamespace('aurelia-pager', {
