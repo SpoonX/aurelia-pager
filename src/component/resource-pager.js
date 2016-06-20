@@ -3,10 +3,11 @@ import {resolvedView} from 'aurelia-view-manager';
 import {Pager} from '../pager';
 import {getLogger} from 'aurelia-logging';
 import {EntityManager} from 'aurelia-orm';
+import {Config} from '../config';
 
 @customElement('resource-pager')
 @resolvedView('spoonx/pager', 'pager')
-@inject(EntityManager)
+@inject(EntityManager, Config)
 export class ResourcePager extends Pager {
 
   @bindable({defaultBindingMode: bindingMode.oneTime})
@@ -22,8 +23,8 @@ export class ResourcePager extends Pager {
   @bindable range    = 3
   @bindable limit    = 30
 
-  constructor(entityManager) {
-    super();
+  constructor(entityManager, config) {
+    super(config);
     this.pages = 0;
     this.logger   = getLogger('spoonx/pager');
     this.entityManager = entityManager;

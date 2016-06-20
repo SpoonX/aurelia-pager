@@ -7,8 +7,10 @@ export class Pager {
   range = 3
   pages
 
-  constructor() {
+  constructor(config) {
+    console.log(config)
     this.page = this.page || 1;
+    Object.assign(this, config.configurations);
   }
 
   dataChanged() {
@@ -43,7 +45,7 @@ export class Pager {
   }
 
   @computedFrom('page', 'pages', 'range')
-  get numbers() {
+  get pageNumbers() {
     let numbers = [];
 
     for (let index = 0; index < Math.min(this.pages, this.range * 2 + 1); index++) {
