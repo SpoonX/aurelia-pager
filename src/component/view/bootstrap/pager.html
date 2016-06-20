@@ -4,27 +4,27 @@
 
       <!-- first page -->
       <li class.bind="page <= 1 ? 'disabled': ''">
-        <a click.delegate="change(1)">&#171;</a>
+        <a click.delegate="setPage(1)">&#171;</a>
       </li>
 
       <!-- previous page -->
       <li class="${page <= 1 ? 'disabled': ''}">
-        <a click.delegate="prev()">&#8249;</a>
+        <a click.delegate="addPage(-1)">&#8249;</a>
       </li>
 
       <!-- pages -->
       <li repeat.for="number of numbers" class="${page === number ? 'active' : ''}">
-        <a href="#" click.delegate="change(number)">${number}</a>
+        <a href="#" click.delegate="setPage(number)">${number}</a>
       </li>
 
       <!-- next -->
       <li class.bind="page >= pages ? 'disabled': ''">
-        <a click.delegate="next()">&#8250;</a>
+        <a click.delegate="addPage(1)">&#8250;</a>
       </li>
 
       <!-- last page -->
       <li class.bind="page === pages ? 'disabled': ''">
-        <a click.delegate="change(pages)">&#187;</a>
+        <a click.delegate="setPage(pages)">&#187;</a>
       </li>
     </ul>
   </nav>

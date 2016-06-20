@@ -1,16 +1,11 @@
-import {bindable, customElement, bindingMode, computedFrom} from 'aurelia-framework';
-import {resolvedView} from 'aurelia-view-manager';
+import {computedFrom, inject} from 'aurelia-framework';
 
-@resolvedView('spoonx/pager', 'pager')
-@customElement('pager')
 export class Pager {
 
-  @bindable({defaultBindingMode: bindingMode.twoWay}) page
-
-  @bindable data    //set the data if you want to alter the
-  @bindable range
-  @bindable limit
-  @bindable pages
+  page  = 1
+  data
+  range = 3
+  pages
 
   constructor() {
     this.page = this.page || 1;
@@ -25,15 +20,13 @@ export class Pager {
     this.page = 1;
   }
 
-  next() {
-    return this.change(this.page + 1);
+  addPage(page) {
+    this.setPage(this.page + page);
+
+    return this.page;
   }
 
-  prev() {
-    return this.change(this.page - 1);
-  }
-
-  change(page) {
+  setPage(page) {
     if (this.page < 0) {
       this.page = 0;
       return this.page;
@@ -53,13 +46,17 @@ export class Pager {
   get numbers() {
     let numbers = [];
 
-    for (let index = 0; index < this.range * 2 + 1; index++) {
+    for (let index = 0; index < Math.min(this.pages, this.range * 2 + 1); index++) {
       numbers[index] = number.call(this, index);
     }
 
     return numbers;
 
     function number(index) {
+      if(this.pages < this.range * 2 + 1) {
+        return index + 1;
+      }
+
       if (this.page + this.range > this.pages) {
         return this.pages - (this.range * 2) + index;
       }
