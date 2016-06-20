@@ -15,11 +15,12 @@ export class ResourcePager extends Pager {
   @bindable({defaultBindingMode: bindingMode.twoWay})
   page = 1
 
+  @bindable({defaultBindingMode: bindingMode.oneTime})
   @bindable repository
 
+  @bindable criteria = {}
   @bindable range    = 3
   @bindable limit    = 30
-  @bindable criteria = {}
 
   constructor(entityManager) {
     super();
@@ -34,7 +35,7 @@ export class ResourcePager extends Pager {
   }
 
   reloadCount() {
-    this.resource.count(this.criteria, true).then(result => {
+    this.repository.count(this.criteria, true).then(result => {
       this.page = 1;
       this.pages = Math.ceil(result.count / this.limit) || 1;
     }).catch(error => {
