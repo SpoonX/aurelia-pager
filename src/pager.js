@@ -17,7 +17,7 @@ export class Pager {
 
   constructor(config) {
     /* overwrite the defaults for the component */
-    Object.assing(this, config.configurations);
+    Object.assign(this, config.configurations);
   }
 
   attached() {
