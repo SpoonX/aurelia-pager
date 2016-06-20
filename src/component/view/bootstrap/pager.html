@@ -13,8 +13,8 @@
       </li>
 
       <!-- pages -->
-      <li repeat.for="number of numbers" class="${page === number ? 'active' : ''}">
-        <a href="#" click.delegate="setPage(number)">${number}</a>
+      <li repeat.for="pageNumber of pageNumbers" class="${page === pageNumber ? 'active' : ''}">
+        <a href="#" click.delegate="setPage(pageNumber)">${pageNumber}</a>
       </li>
 
       <!-- next -->
