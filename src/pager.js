@@ -1,4 +1,4 @@
-import {computedFrom, inject} from 'aurelia-framework';
+import {computedFrom} from 'aurelia-framework';
 
 export class Pager {
 
@@ -53,7 +53,7 @@ export class Pager {
     return numbers;
 
     function number(index) {
-      if(this.pages < this.range * 2 + 1) {
+      if (this.pages < this.range * 2 + 1) {
         return index + 1;
       }
 

@@ -1,6 +1,6 @@
-import {bindable, customElement, bindingMode, computedFrom, inject} from 'aurelia-framework';
+import {bindable, customElement, bindingMode} from 'aurelia-framework';
 import {resolvedView} from 'aurelia-view-manager';
-import {Pager as Base} from '../pager'
+import {Pager as Base} from '../pager';
 
 @customElement('pager')
 @resolvedView('spoonx/pager', 'pager')
