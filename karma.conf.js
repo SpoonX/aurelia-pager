@@ -1,24 +1,17 @@
-// Karma configuration
 module.exports = function (config) {
-  config.set({
+  var configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '.',
+    basePath: '',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jspm', 'jasmine'],
 
     jspm: {
-      config: 'config.js',
       // Edit this to your needs
-      loadFiles : ['test/setup.js', 'test/unit/**/*.js'],
-      serveFiles: ['src/**/*.*'],
-      paths     : {
-        '*'       : '*',
-        'github:*': 'jspm_packages/github/*',
-        'npm:*'   : 'jspm_packages/npm/*'
-      }
+      loadFiles: ['test/setup.js', 'test/**/*.spec.js'],
+      serveFiles: ['src/**/*.js', 'test/resources/**/*.js'],
     },
 
     // list of files / patterns to load in the browser
@@ -29,15 +22,15 @@ module.exports = function (config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors      : {
+    preprocessors: {
       'test/**/*.js': ['babel'],
-      'src/**/*.js' : ['babel']
+      'src/**/*.js': ['babel']
     },
     'babelPreprocessor': {
       options: {
         sourceMap: 'inline',
-        presets  : ['es2015-loose', 'stage-1'],
-        plugins  : [
+        presets: [ 'es2015-loose', 'stage-1'],
+        plugins: [
           'syntax-flow',
           'transform-decorators-legacy',
           'transform-flow-strip-types'
@@ -65,10 +58,16 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'Firefox', 'ChromeCanary'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
-  });
+  };
+
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Firefox'];
+  }
+
+  config.set(configuration);
 };

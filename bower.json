@@ -1,0 +1,29 @@
+{
+  "name": "aurelia-pager",
+  "version": "0.0.5",
+  "description": "Aurelia-only pagination",
+  "keywords": [
+    "aurelia",
+    "pagination",
+    "pager",
+    "spoonx"
+  ],
+  "homepage": "https://github.com/SpoonX/aurelia-pager#readme",
+  "main": "dist/commonjs/aurelia-pager.js",
+  "moduleType": "node",
+  "license": "MIT",
+  "author": "VMBindraban <vijay@spoonx.nl> (http://spoonx.nl)",
+  "contributors": [
+    "RWOverdijk <wesley@spoonx.nl> (http://spoonx.nl/)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SpoonX/aurelia-pager.git"
+  },
+  },
+  "dependencies": {
+    "aurelia-binding": "^1.0.0-rc.1.0.0",
+    "aurelia-templating": "^1.0.0-rc.1.0.0",
+    "aurelia-view-manager": "^0.0.5"
+  }
+}
