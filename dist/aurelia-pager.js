@@ -1,5 +1,5 @@
-import {bindable,bindingMode} from 'aurelia-binding';
-import {customElement} from 'aurelia-templating';
+import {bindingMode} from 'aurelia-binding';
+import {bindable,customElement} from 'aurelia-templating';
 import {resolvedView,Config} from 'aurelia-view-manager';
 
 @customElement('pager')

@@ -3,7 +3,7 @@
 System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'], function (_export, _context) {
   "use strict";
 
-  var bindable, bindingMode, customElement, resolvedView, Config, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
+  var bindingMode, bindable, customElement, resolvedView, Config, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -62,9 +62,9 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
 
   return {
     setters: [function (_aureliaBinding) {
-      bindable = _aureliaBinding.bindable;
       bindingMode = _aureliaBinding.bindingMode;
     }, function (_aureliaTemplating) {
+      bindable = _aureliaTemplating.bindable;
       customElement = _aureliaTemplating.customElement;
     }, function (_aureliaViewManager) {
       resolvedView = _aureliaViewManager.resolvedView;
