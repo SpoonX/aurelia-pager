@@ -22,7 +22,7 @@ var paths = {
   useTypeScriptForDTS: false,
   importsToAdd: [], // eg. non-concated local imports in the main file as they will get removed during the build process
   importsToIgnoreForDts: [], // imports that are only used internally. no need to d.ts export them
-  jsResources: [], // js to transpile, but not be concated and keeping their relative path
+  jsResources: [appRoot + 'pager.js'], // js to transpile, but not be concated and keeping their relative path
   resources: appRoot + '{**/*.css,**/*.html}',
   sort: true,
   concat: true
