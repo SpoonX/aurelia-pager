@@ -1,7 +1,8 @@
+import {Config,resolvedView} from 'aurelia-view-manager';
 import {bindingMode} from 'aurelia-binding';
 import {bindable,customElement} from 'aurelia-templating';
-import {resolvedView,Config} from 'aurelia-view-manager';
 
+export declare function configure(aurelia?: any): any;
 export declare class Pager {
   page: any;
   pagerange: any;
@@ -21,4 +22,3 @@ export declare class Pager {
   firstPage(): any;
   goToPage(page?: any): any;
 }
-export declare function configure(aurelia?: any): any;
