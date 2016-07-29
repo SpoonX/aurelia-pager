@@ -3,14 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.configure = configure;
 
-var _aureliaViewManager = require('aurelia-view-manager');
+var _aureliaPager = require('./aurelia-pager');
 
-function configure(aurelia) {
-  aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {
-    location: './{{framework}}/{{view}}.html'
+Object.keys(_aureliaPager).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _aureliaPager[key];
+    }
   });
-
-  aurelia.globalResources('./pager');
-}
+});

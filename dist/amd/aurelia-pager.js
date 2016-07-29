@@ -1,10 +1,11 @@
-define(['exports', 'aurelia-framework', 'aurelia-view-manager'], function (exports, _aureliaFramework, _aureliaViewManager) {
+define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'], function (exports, _aureliaBinding, _aureliaTemplating, _aureliaViewManager) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.Pager = undefined;
+  exports.configure = configure;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -16,11 +17,7 @@ define(['exports', 'aurelia-framework', 'aurelia-view-manager'], function (expor
     });
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
     var desc = {};
@@ -57,9 +54,9 @@ define(['exports', 'aurelia-framework', 'aurelia-view-manager'], function (expor
 
   var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
 
-  var Pager = exports.Pager = (_dec = (0, _aureliaFramework.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
+  var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaBinding.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
     function Pager() {
-      _classCallCheck(this, Pager);
+      
 
       _initDefineProp(this, 'page', _descriptor, this);
 
@@ -180,31 +177,38 @@ define(['exports', 'aurelia-framework', 'aurelia-view-manager'], function (expor
     };
 
     return Pager;
-  }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaFramework.bindable], {
+  }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaBinding.bindable], {
     enumerable: true,
     initializer: function initializer() {
       return 1;
     }
-  }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [_aureliaFramework.bindable], {
+  }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [_aureliaBinding.bindable], {
     enumerable: true,
     initializer: function initializer() {
       return 3;
     }
-  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [_aureliaFramework.bindable], {
+  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [_aureliaBinding.bindable], {
     enumerable: true,
     initializer: function initializer() {
       return 30;
     }
-  }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [_aureliaFramework.bindable], {
+  }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [_aureliaBinding.bindable], {
     enumerable: true,
     initializer: function initializer() {
       return {};
     }
-  }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [_aureliaFramework.bindable], {
+  }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [_aureliaBinding.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaFramework.bindable], {
+  }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaBinding.bindable], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class) || _class);
+  function configure(aurelia) {
+    aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {
+      location: './{{framework}}/{{view}}.html'
+    });
+
+    aurelia.globalResources('./pager');
+  }
 });
