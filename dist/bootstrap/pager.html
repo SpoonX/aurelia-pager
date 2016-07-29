@@ -1,0 +1,31 @@
+<template>
+  <nav>
+    <ul class="pagination">
+
+      <!-- first page -->
+      <li class.bind="page <= 1 ? 'disabled': ''">
+        <a click.delegate="firstPage()">&#171;</a>
+      </li>
+
+      <!-- previous page -->
+      <li class="${page <= 1 ? 'disabled': ''}">
+        <a click.delegate="prevPage()">&#8249;</a>
+      </li>
+
+      <!-- pages -->
+      <li repeat.for="nav of navs" class="${nav.current ? 'active' : ''}">
+        <a href="#" click.delegate="nav.load(nav.text)">${nav.text}</a>
+      </li>
+
+      <!-- next -->
+      <li class.bind="page >= pages ? 'disabled': ''">
+        <a click.delegate="nextPage()">&#8250;</a>
+      </li>
+
+      <!-- last page -->
+      <li class.bind="page === pages ? 'disabled': ''">
+        <a click.delegate="lastPage()">&#187;</a>
+      </li>
+    </ul>
+  </nav>
+</template>

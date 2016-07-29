@@ -1,23 +1,18 @@
 'use strict';
 
-System.register(['aurelia-view-manager'], function (_export, _context) {
+System.register(['./aurelia-pager'], function (_export, _context) {
   "use strict";
 
-  var Config;
   return {
-    setters: [function (_aureliaViewManager) {
-      Config = _aureliaViewManager.Config;
-    }],
-    execute: function () {
-      function configure(aurelia) {
-        aurelia.container.get(Config).configureNamespace('aurelia-pager', {
-          location: './{{framework}}/{{view}}.html'
-        });
+    setters: [function (_aureliaPager) {
+      var _exportObj = {};
 
-        aurelia.globalResources('./pager');
+      for (var _key in _aureliaPager) {
+        if (_key !== "default" && _key !== "__esModule") _exportObj[_key] = _aureliaPager[_key];
       }
 
-      _export('configure', configure);
-    }
+      _export(_exportObj);
+    }],
+    execute: function () {}
   };
 });

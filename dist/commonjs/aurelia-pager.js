@@ -1,4 +1,19 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Pager = undefined;
+
 var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+
+exports.configure = configure;
+
+var _aureliaBinding = require('aurelia-binding');
+
+var _aureliaTemplating = require('aurelia-templating');
+
+var _aureliaViewManager = require('aurelia-view-manager');
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -9,6 +24,8 @@ function _initDefineProp(target, property, descriptor, context) {
     value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
   });
 }
+
+
 
 function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
   var desc = {};
@@ -43,11 +60,10 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { bindable, customElement, bindingMode } from 'aurelia-framework';
-import { resolvedView } from 'aurelia-view-manager';
+var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaBinding.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
+  function Pager() {
+    
 
-export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia-pager', 'pager'), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = class Pager {
-  constructor() {
     _initDefineProp(this, 'page', _descriptor, this);
 
     _initDefineProp(this, 'pagerange', _descriptor2, this);
@@ -61,67 +77,69 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
     _initDefineProp(this, 'pages', _descriptor6, this);
   }
 
-  attached() {
+  Pager.prototype.attached = function attached() {
     if (!this.page) {
       this.page = 1;
     }
 
     this.reloadCount();
-  }
+  };
 
-  reloadCount() {
+  Pager.prototype.reloadCount = function reloadCount() {
     if (this.resource) {
       return this._calculatePages();
     }
 
     this._calculateRange();
-  }
+  };
 
-  pageChanged(newValue, oldValue) {
+  Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
     }
-  }
+  };
 
-  criteriaChanged(newValue, oldValue) {
+  Pager.prototype.criteriaChanged = function criteriaChanged(newValue, oldValue) {
     if (this.resource && newValue !== oldValue) {
       this._calculatePages();
     }
-  }
+  };
 
-  nextPage() {
+  Pager.prototype.nextPage = function nextPage() {
     if (this.page < this.pages) {
       this.page++;
     }
-  }
+  };
 
-  prevPage() {
+  Pager.prototype.prevPage = function prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
       this.page--;
     }
-  }
+  };
 
-  lastPage() {
+  Pager.prototype.lastPage = function lastPage() {
     this.page = this.pages;
-  }
+  };
 
-  firstPage() {
+  Pager.prototype.firstPage = function firstPage() {
     this.page = 1;
-  }
+  };
 
-  goToPage(page) {
+  Pager.prototype.goToPage = function goToPage(page) {
     if (page < 0 || page > this.pages) {
       return;
     }
 
     this._calculateRange();
-  }
+  };
 
-  _calculateRange() {
-    let rangeStart = Math.max(this.page - this.pagerange, 1);
-    let rangeEnd = Math.min(this.page + this.pagerange, this.pages);
-    let navs = [];
-    let i;
+  Pager.prototype._calculateRange = function _calculateRange() {
+    var _this = this;
+
+    var rangeStart = Math.max(this.page - this.pagerange, 1);
+    var rangeEnd = Math.min(this.page + this.pagerange, this.pages);
+    var navs = [];
+    var i = void 0;
 
     if (this.page <= this.pagerange) {
       rangeEnd = Math.min(this.pagerange * 2 + 1, this.pages);
@@ -139,52 +157,63 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
       navs.push({
         text: i.toString(),
         current: i === this.page,
-        load: page => {
-          this.page = parseInt(page);
+        load: function load(page) {
+          _this.page = parseInt(page);
         }
       });
     }
 
     this.navs = navs;
-  }
+  };
 
-  _calculatePages() {
+  Pager.prototype._calculatePages = function _calculatePages() {
+    var _this2 = this;
+
     if (Array.isArray(this.resource)) {
       this.pages = Math.ceil(this.resource.length / this.limit) || 1;
       return this.goToPage(1);
     }
 
-    this.resource.count(this.criteria, true).then(result => {
-      this.pages = Math.ceil(result.count / this.limit) || 1;
-      this.goToPage(1);
-    }).catch(error => {
+    this.resource.count(this.criteria, true).then(function (result) {
+      _this2.pages = Math.ceil(result.count / _this2.limit) || 1;
+      _this2.goToPage(1);
+    }).catch(function (error) {
       console.error('Something went wrong.', error);
     });
-  }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, bindable], {
+  };
+
+  return Pager;
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaBinding.bindable], {
   enumerable: true,
-  initializer: function () {
+  initializer: function initializer() {
     return 1;
   }
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [_aureliaBinding.bindable], {
   enumerable: true,
-  initializer: function () {
+  initializer: function initializer() {
     return 3;
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [_aureliaBinding.bindable], {
   enumerable: true,
-  initializer: function () {
+  initializer: function initializer() {
     return 30;
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [_aureliaBinding.bindable], {
   enumerable: true,
-  initializer: function () {
+  initializer: function initializer() {
     return {};
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [_aureliaBinding.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaBinding.bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);
+function configure(aurelia) {
+  aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {
+    location: './{{framework}}/{{view}}.html'
+  });
+
+  aurelia.globalResources('./pager');
+}

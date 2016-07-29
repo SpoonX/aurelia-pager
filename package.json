@@ -1,6 +1,6 @@
 {
   "name": "aurelia-pager",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Aurelia-only pagination",
   "bugs": {
     "url": "https://github.com/SpoonX/aurelia-pager/issues"

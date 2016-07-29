@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-framework', 'aurelia-view-manager'], function (_export, _context) {
+System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'], function (_export, _context) {
   "use strict";
 
-  var bindable, customElement, bindingMode, resolvedView, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
+  var bindable, bindingMode, customElement, resolvedView, Config, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -15,11 +15,7 @@ System.register(['aurelia-framework', 'aurelia-view-manager'], function (_export
     });
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
     var desc = {};
@@ -54,18 +50,30 @@ System.register(['aurelia-framework', 'aurelia-view-manager'], function (_export
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
+  function configure(aurelia) {
+    aurelia.container.get(Config).configureNamespace('aurelia-pager', {
+      location: './{{framework}}/{{view}}.html'
+    });
+
+    aurelia.globalResources('./pager');
+  }
+
+  _export('configure', configure);
+
   return {
-    setters: [function (_aureliaFramework) {
-      bindable = _aureliaFramework.bindable;
-      customElement = _aureliaFramework.customElement;
-      bindingMode = _aureliaFramework.bindingMode;
+    setters: [function (_aureliaBinding) {
+      bindable = _aureliaBinding.bindable;
+      bindingMode = _aureliaBinding.bindingMode;
+    }, function (_aureliaTemplating) {
+      customElement = _aureliaTemplating.customElement;
     }, function (_aureliaViewManager) {
       resolvedView = _aureliaViewManager.resolvedView;
+      Config = _aureliaViewManager.Config;
     }],
     execute: function () {
       _export('Pager', Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia-pager', 'pager'), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
         function Pager() {
-          _classCallCheck(this, Pager);
+          
 
           _initDefineProp(this, 'page', _descriptor, this);
 
