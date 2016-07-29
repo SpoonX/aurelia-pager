@@ -43,8 +43,8 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { bindable, bindingMode } from 'aurelia-binding';
-import { customElement } from 'aurelia-templating';
+import { bindingMode } from 'aurelia-binding';
+import { bindable, customElement } from 'aurelia-templating';
 import { resolvedView, Config } from 'aurelia-view-manager';
 
 export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia-pager', 'pager'), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = class Pager {

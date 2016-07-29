@@ -60,7 +60,7 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaBinding.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
+var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
   function Pager() {
     
 
@@ -183,30 +183,30 @@ var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager
   };
 
   return Pager;
-}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaBinding.bindable], {
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 1;
   }
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [_aureliaBinding.bindable], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 3;
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [_aureliaBinding.bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 30;
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [_aureliaBinding.bindable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return {};
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [_aureliaBinding.bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaBinding.bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);
