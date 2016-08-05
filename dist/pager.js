@@ -7,13 +7,13 @@ import {resolvedView} from 'aurelia-view-manager';
 export class Pager {
   @bindable({defaultBindingMode: bindingMode.twoWay})
 
-  @bindable page      = 1;  // current page
-  @bindable pagerange = 3;  // ranges of pages to view e.g "3 4 [5] 6 7"
-  @bindable limit     = 30; // the amount of records on a page
-  @bindable criteria  = {}; // search criteria for DB resource
-  @bindable resource;       // data resource, either a ORM or a array
-  @bindable pages;          // total amount of pages
-  @bindable resultCount = 0;
+  @bindable page          = 1;  // current page
+  @bindable resourceCount = 0;  // amount of results found
+  @bindable pagerange     = 3;  // ranges of pages to view e.g "3 4 [5] 6 7"
+  @bindable limit         = 30; // the amount of records on a page
+  @bindable criteria      = {}; // search criteria for DB resource
+  @bindable resource;           // data resource, either a ORM or a array
+  @bindable pages;              // total amount of pages
 
   attached() {
     if (!this.page) {
@@ -115,8 +115,8 @@ export class Pager {
     }
 
     this.resource.count(this.criteria, true).then(result => {
-      this.resultCount = result.count;
-      this.pages       = Math.ceil(result.count / this.limit) || 1;
+      this.resourceCount = result.count;
+      this.pages         = Math.ceil(result.count / this.limit) || 1;
       this.goToPage(1);
     }).catch(error => {
       console.error('Something went wrong.', error);

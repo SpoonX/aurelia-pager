@@ -66,17 +66,17 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
 
           _initDefineProp(this, 'page', _descriptor, this);
 
-          _initDefineProp(this, 'pagerange', _descriptor2, this);
+          _initDefineProp(this, 'resourceCount', _descriptor2, this);
 
-          _initDefineProp(this, 'limit', _descriptor3, this);
+          _initDefineProp(this, 'pagerange', _descriptor3, this);
 
-          _initDefineProp(this, 'criteria', _descriptor4, this);
+          _initDefineProp(this, 'limit', _descriptor4, this);
 
-          _initDefineProp(this, 'resource', _descriptor5, this);
+          _initDefineProp(this, 'criteria', _descriptor5, this);
 
-          _initDefineProp(this, 'pages', _descriptor6, this);
+          _initDefineProp(this, 'resource', _descriptor6, this);
 
-          _initDefineProp(this, 'resultCount', _descriptor7, this);
+          _initDefineProp(this, 'pages', _descriptor7, this);
         }
 
         Pager.prototype.attached = function attached() {
@@ -177,7 +177,7 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
           }
 
           this.resource.count(this.criteria, true).then(function (result) {
-            _this2.resultCount = result.count;
+            _this2.resourceCount = result.count;
             _this2.pages = Math.ceil(result.count / _this2.limit) || 1;
             _this2.goToPage(1);
           }).catch(function (error) {
@@ -191,32 +191,32 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
         initializer: function initializer() {
           return 1;
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
-        enumerable: true,
-        initializer: function initializer() {
-          return 3;
-        }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
-        enumerable: true,
-        initializer: function initializer() {
-          return 30;
-        }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
-        enumerable: true,
-        initializer: function initializer() {
-          return {};
-        }
-      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [bindable], {
-        enumerable: true,
-        initializer: null
-      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
-        enumerable: true,
-        initializer: null
-      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'resultCount', [bindable], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'resourceCount', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return 0;
         }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return 3;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return 30;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return {};
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [bindable], {
+        enumerable: true,
+        initializer: null
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+        enumerable: true,
+        initializer: null
       })), _class2)) || _class) || _class));
 
       _export('Pager', Pager);
