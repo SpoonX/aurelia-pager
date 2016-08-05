@@ -1,5 +1,4 @@
 import {StageComponent} from 'aurelia-testing';
-import {Pager} from '../../src/pager';
 
 describe('the Pager component', () => {
   let config          = {};
@@ -11,9 +10,8 @@ describe('the Pager component', () => {
     {id: 3, name: 'jan'}
   ];
   let component;
-  let eventArg;
 
-  class mockResource {
+  class MockResource {
     count = () => {
       return Promise.resolve({count: mockItems});
     }
@@ -30,12 +28,12 @@ describe('the Pager component', () => {
   // setup component for each test
   beforeEach(() => {
     setConfig({
-      page     : 1,
-      pages    : 10,
-      limit    : 30,
+      page: 1,
+      pages: 10,
+      limit: 30,
       pagerange: 3,
-      resource : null,
-      criteria : null,
+      resource: null,
+      criteria: null
     });
 
     component = StageComponent
@@ -53,7 +51,7 @@ describe('the Pager component', () => {
     component.create().then(() => {
       const pageElement = document.querySelector('.active');
       expect(pageElement.innerHTML).toContain('au-target-id');
-    }).then(done)
+    }).then(done);
   });
 
   it('can change the current page', done => {
@@ -92,7 +90,7 @@ describe('the Pager component', () => {
   });
 
   it('can load data from DB resource', done => {
-    component.boundTo(setConfig({resource: new mockResource()})).create().then(() => {
+    component.boundTo(setConfig({resource: new MockResource()})).create().then(() => {
       const navElement = document.querySelector('.pagination').getElementsByTagName('li');
       expect(navElement.length).toBe(Math.ceil(mockItems / config.limit)  + nagivationItems);
     }).then(done);
@@ -101,7 +99,7 @@ describe('the Pager component', () => {
   it('must set atleast 1 page', done => {
     mockItems = 0;
 
-    component.boundTo(setConfig({resource: new mockResource()})).create().then(() => {
+    component.boundTo(setConfig({resource: new MockResource()})).create().then(() => {
       const navElement = document.querySelector('.pagination').getElementsByTagName('li');
       expect(navElement.length).toBe(1 + nagivationItems);
     }).then(done);

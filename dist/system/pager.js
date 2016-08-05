@@ -3,7 +3,7 @@
 System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'], function (_export, _context) {
   "use strict";
 
-  var bindingMode, bindable, customElement, resolvedView, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, Pager;
+  var bindingMode, bindable, customElement, resolvedView, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, Pager;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -75,6 +75,8 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
           _initDefineProp(this, 'resource', _descriptor5, this);
 
           _initDefineProp(this, 'pages', _descriptor6, this);
+
+          _initDefineProp(this, 'resultCount', _descriptor7, this);
         }
 
         Pager.prototype.attached = function attached() {
@@ -158,7 +160,7 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
               text: i.toString(),
               current: i === this.page,
               load: function load(page) {
-                _this.page = parseInt(page);
+                _this.page = parseInt(page, 10);
               }
             });
           }
@@ -175,6 +177,7 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
           }
 
           this.resource.count(this.criteria, true).then(function (result) {
+            _this2.resultCount = result.count;
             _this2.pages = Math.ceil(result.count / _this2.limit) || 1;
             _this2.goToPage(1);
           }).catch(function (error) {
@@ -209,6 +212,11 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
       }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
         enumerable: true,
         initializer: null
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'resultCount', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return 0;
+        }
       })), _class2)) || _class) || _class));
 
       _export('Pager', Pager);

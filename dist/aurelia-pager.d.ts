@@ -10,8 +10,7 @@ export declare class Pager {
   criteria: any;
   resource: any;
   pages: any;
-  
-  // total amount of pages
+  resultCount: any;
   attached(): any;
   reloadCount(): any;
   pageChanged(newValue?: any, oldValue?: any): any;

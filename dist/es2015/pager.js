@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -60,6 +60,8 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
     _initDefineProp(this, 'resource', _descriptor5, this);
 
     _initDefineProp(this, 'pages', _descriptor6, this);
+
+    _initDefineProp(this, 'resultCount', _descriptor7, this);
   }
 
   attached() {
@@ -141,7 +143,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
         text: i.toString(),
         current: i === this.page,
         load: page => {
-          this.page = parseInt(page);
+          this.page = parseInt(page, 10);
         }
       });
     }
@@ -156,6 +158,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
     }
 
     this.resource.count(this.criteria, true).then(result => {
+      this.resultCount = result.count;
       this.pages = Math.ceil(result.count / this.limit) || 1;
       this.goToPage(1);
     }).catch(error => {
@@ -188,4 +191,9 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
 }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
   enumerable: true,
   initializer: null
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'resultCount', [bindable], {
+  enumerable: true,
+  initializer: function () {
+    return 0;
+  }
 })), _class2)) || _class) || _class);
