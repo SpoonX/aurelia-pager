@@ -28,6 +28,7 @@
   },
   "jspm": {
     "registry": "npm",
+    "jspmPackage": true,
     "main": "aurelia-pager",
     "format": "amd",
     "directories": {
@@ -36,13 +37,26 @@
     "dependencies": {
       "aurelia-binding": "^1.0.0-rc.1.0.0",
       "aurelia-templating": "^1.0.0-rc.1.0.0",
-      "aurelia-view-manager": "^0.0.5"
+      "aurelia-view-manager": "^0.0.7"
+    },
+    "peerDependencies": {
+      "aurelia-binding": "^1.0.0-rc.1.0.0",
+      "aurelia-templating": "^1.0.0-rc.1.0.0",
+      "aurelia-view-manager": "^0.0.7"
     },
     "devDependencies": {
-      "aurelia-pal-browser": "^1.0.0-rc.1.0.1",
-      "aurelia-polyfills": "^1.0.0-rc.1.0.0",
-      "aurelia-testing": "^1.0.0-beta.1.0.3"
+      "aurelia-bootstrapper": "^1.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-pal-browser": "^1.0.0",
+      "aurelia-path": "^1.0.0",
+      "aurelia-polyfills": "^1.0.0",
+      "aurelia-testing": "^1.0.0-beta.2.0.0"
     }
+  },
+  "dependencies": {
+    "aurelia-binding": "^1.0.0-rc.1.0.0",
+    "aurelia-templating": "^1.0.0-rc.1.0.0",
+    "aurelia-view-manager": "^0.0.7"
   },
   "devDependencies": {
     "aurelia-tools": "^0.2.3",
@@ -66,7 +80,7 @@
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-conventional-changelog": "^1.1.0",
-    "gulp-eslint": "^3.0.1",
+    "gulp-eslint": "^2.0.0",
     "gulp-ignore": "^2.0.1",
     "gulp-insert": "^0.5.0",
     "gulp-rename": "^1.2.2",
@@ -98,7 +112,8 @@
   "aurelia": {
     "build": {
       "resources": [
-        "aurelia-pager/bootstrap"
+        "aurelia-pager/pager",
+        "aurelia-pager/bootstrap/pager.html"
       ]
     }
   }

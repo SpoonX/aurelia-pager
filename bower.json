@@ -20,10 +20,9 @@
     "type": "git",
     "url": "git+ssh://git@github.com/SpoonX/aurelia-pager.git"
   },
-  },
   "dependencies": {
     "aurelia-binding": "^1.0.0-rc.1.0.0",
     "aurelia-templating": "^1.0.0-rc.1.0.0",
-    "aurelia-view-manager": "^0.0.5"
+    "aurelia-view-manager": "^0.0.7"
   }
 }
