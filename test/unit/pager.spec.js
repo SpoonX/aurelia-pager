@@ -1,6 +1,5 @@
 import {StageComponent} from 'aurelia-testing';
 import {bootstrap} from 'aurelia-bootstrapper';
-import {Container} from 'aurelia-dependency-injection';
 import {Config} from 'aurelia-view-manager';
 
 describe('the Pager component', () => {
@@ -44,14 +43,13 @@ describe('the Pager component', () => {
       .inView('<pager pages.bind="pages" page.bind="page" limit.bind="limit" pagerange.bind="pagerange" resource.bind="resource" criteria.bind="criteria"></pager>')
       .boundTo(config);
 
+    component.configure = aurelia => {
+      aurelia.use.standardConfiguration();
 
-      component.configure = aurelia => {
-         aurelia.use.standardConfiguration()
-
-         aurelia.container.get(Config).configureNamespace('aurelia-pager', {
-           location: './{{framework}}/{{view}}.html'
-         });
-      }
+      aurelia.container.get(Config).configureNamespace('aurelia-pager', {
+        location: './{{framework}}/{{view}}.html'
+      });
+    };
   });
 
   // destroy component after each test
