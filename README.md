@@ -1,7 +1,70 @@
 # Pager
+
 Pagination / pager module for aurelia. Works well with [aurelia-paged](http://aurelia-orm.spoonx.org/components.html).
 
-## Bindables
+## Uses
+
+Aurelia-pager needs an installation of [aurelia-view-manager](https://www.npmjs.com/package/aurelia-view-manager).
+
+## Used by
+
+Follwoing need an installation of aurelia-pager:
+[aurelia-datatable](https://www.npmjs.com/package/aurelia-datatable).
+
+## Installation
+
+### Aureli-Cli
+
+Run `npm i aurelia-pager --save` from your project root.
+
+And add following to the `build.bundles.dependencies` section of `aurelia-project/aurelia.json`:
+
+```js
+"dependencies": [
+  {
+    "name": "aurelia-pager",
+    "path": "../node_modules/aurelia-pager/dist/amd",
+    "main": "aurelia-pager",
+    "resources": [
+      "bootstrap/pager.html"
+    ]},
+  },
+  // ...
+],
+```
+
+### Jspm
+
+Run `jspm i aurelia-pager`
+
+Add add following to the `bundles.dist.aurelia.includes` section of `build/bundles.js`:
+
+```js
+ `aurelia-pager`,
+ "[aurelia-pager/**/*.js]",
+ "aurelia-pager/**/*.html!text",
+```
+
+If the installation results in having forks, try resolving them by running:
+
+```sh
+jspm inspect --forks
+jspm resolve --only registry:package-name@version
+```
+
+### Webpack
+
+Run `npm i aurelia-pager --save` from your project root.
+
+Add `'aurelia-pager'` in the `coreBundles.aurelia section` of your `webpack.config.js`.
+
+### Typescript
+
+Npm-based installations pick up the typings automatically. For Jspm-based installations, run `typings i github:spoonx/aurelia-pager` or add `"aurelia-pager": "github:spoonx/aurelia-pager",` to your `typings.json` and run `typings i`.
+
+## Usage
+
+### Bindables
 
 #### page (optional)
 
@@ -23,20 +86,25 @@ Range is 3: `2  3  4  [5]  6  7 8`, `[1] 2  3  4  5  6  7`
 
 The amount of displaying is `range` * 2 + `current page`
 
-#### limit (optional)
+##### limit (optional)
+
 This will set the amount of items on a page and will be used to calculate the amount of pages, default is 30.
 
-#### resource (optional)
+##### resource (optional)
+
 Will override the `pages` option.
 
 ###### Using a database
+
 Fetches the count from the DB using [aurelia-orm](https://github.com/SpoonX/aurelia-orm).
 Expects that the amount of pages is located in the `count` property.
 
 ###### Using an array
+
 Calculates the pages based on the amount of items in the array and the limit.
 
-#### criteria (optional)
+##### criteria (optional)
+
 This option only works when `resource` is enabled and comes from the DB.
 Parameter gets passed straight to the query field of `.count()`.
 
@@ -49,10 +117,11 @@ Example (sailsjs/waterline or express):
 }
 ```
 
-## Changing framework
+### Changing framework
+
 You can override the framework used for the datatable with any of the [supported ones](https://github.com/SpoonX/aurelia-pager/tree/master/src) using the [aurelia-view-manager](https://github.com/spoonx/aurelia-view-manager).
 
-## Examples:
+### Examples
 
 ```html
 <pager pages.bind="$amountOfPages" page.bind="1" pagerange.bind="2"></pager>
