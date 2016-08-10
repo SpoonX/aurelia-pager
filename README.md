@@ -4,12 +4,15 @@ Pagination / pager module for aurelia. Works well with [aurelia-paged](http://au
 
 ## Uses
 
-Aurelia-pager needs an installation of [aurelia-view-manager](https://www.npmjs.com/package/aurelia-view-manager).
+Aurelia-pager needs following plugins installed and configured:
+
+* [aurelia-view-manager](https://www.npmjs.com/package/aurelia-view-manager)
 
 ## Used by
 
-Follwoing need an installation of aurelia-pager:
-[aurelia-datatable](https://www.npmjs.com/package/aurelia-datatable).
+Following plugins need an installation of aurelia-pager:
+
+* [aurelia-datatable](https://www.npmjs.com/package/aurelia-datatable).
 
 ## Installation
 
@@ -17,7 +20,7 @@ Follwoing need an installation of aurelia-pager:
 
 Run `npm i aurelia-pager --save` from your project root.
 
-And add following to the `build.bundles.dependencies` section of `aurelia-project/aurelia.json`:
+And add the following to the `build.bundles.dependencies` section of `aurelia-project/aurelia.json`:
 
 ```js
 "dependencies": [
@@ -27,7 +30,7 @@ And add following to the `build.bundles.dependencies` section of `aurelia-projec
     "main": "aurelia-pager",
     "resources": [
       "bootstrap/pager.html"
-    ]},
+    ]
   },
   // ...
 ],
@@ -35,12 +38,12 @@ And add following to the `build.bundles.dependencies` section of `aurelia-projec
 
 ### Jspm
 
-Run `jspm i aurelia-pager`
+Run `jspm i aurelia-pager` from your project root.
 
-Add add following to the `bundles.dist.aurelia.includes` section of `build/bundles.js`:
+And add following to the `bundles.dist.aurelia.includes` section of `build/bundles.js`:
 
 ```js
- `aurelia-pager`,
+ "aurelia-pager",
  "[aurelia-pager/**/*.js]",
  "aurelia-pager/**/*.html!text",
 ```
@@ -56,7 +59,7 @@ jspm resolve --only registry:package-name@version
 
 Run `npm i aurelia-pager --save` from your project root.
 
-Add `'aurelia-pager'` in the `coreBundles.aurelia section` of your `webpack.config.js`.
+And add `aurelia-pager` in the `coreBundles.aurelia` section of your `webpack.config.js`.
 
 ### Typescript
 
