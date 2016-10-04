@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-view-manager'], function (exports, _aureliaViewManager) {
+define(['exports', './pager', 'aurelia-view-manager'], function (exports, _pager, _aureliaViewManager) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {

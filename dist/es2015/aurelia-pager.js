@@ -1,3 +1,4 @@
+import { Pager } from './pager';
 import { Config } from 'aurelia-view-manager';
 
 export function configure(aurelia) {

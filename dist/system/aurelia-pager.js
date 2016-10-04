@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-view-manager'], function (_export, _context) {
+System.register(['./pager', 'aurelia-view-manager'], function (_export, _context) {
   "use strict";
 
-  var Config;
+  var Pager, Config;
   function configure(aurelia) {
     aurelia.container.get(Config).configureNamespace('aurelia-pager', {
       location: './{{framework}}/{{view}}.html'
@@ -15,7 +15,9 @@ System.register(['aurelia-view-manager'], function (_export, _context) {
   _export('configure', configure);
 
   return {
-    setters: [function (_aureliaViewManager) {
+    setters: [function (_pager) {
+      Pager = _pager.Pager;
+    }, function (_aureliaViewManager) {
       Config = _aureliaViewManager.Config;
     }],
     execute: function () {}
