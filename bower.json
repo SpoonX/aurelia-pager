@@ -1,6 +1,6 @@
 {
   "name": "aurelia-pager",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Aurelia-only pagination",
   "keywords": [
     "aurelia",
@@ -21,8 +21,8 @@
     "url": "git+ssh://git@github.com/SpoonX/aurelia-pager.git"
   },
   "dependencies": {
-    "aurelia-binding": "^1.0.0-rc.1.0.0",
-    "aurelia-templating": "^1.0.0-rc.1.0.0",
-    "aurelia-view-manager": "^0.0.7"
+    "aurelia-binding": "^1.0.0",
+    "aurelia-templating": "^1.0.0",
+    "aurelia-view-manager": "^0.1.0"
   }
 }

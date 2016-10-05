@@ -2,6 +2,8 @@ import {Config,resolvedView} from 'aurelia-view-manager';
 import {bindingMode} from 'aurelia-binding';
 import {bindable,customElement} from 'aurelia-templating';
 
+// added for bundling
+// eslint-disable-line no-unused-vars
 export declare function configure(aurelia?: any): any;
 export declare class Pager {
   page: any;

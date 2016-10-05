@@ -1,6 +1,6 @@
 {
   "name": "aurelia-pager",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Aurelia-only pagination",
   "bugs": {
     "url": "https://github.com/SpoonX/aurelia-pager/issues"
@@ -35,14 +35,14 @@
       "dist": "dist/amd"
     },
     "dependencies": {
-      "aurelia-binding": "^1.0.0-rc.1.0.0",
-      "aurelia-templating": "^1.0.0-rc.1.0.0",
-      "aurelia-view-manager": "^0.0.7"
+      "aurelia-binding": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-view-manager": "^0.1.0"
     },
     "peerDependencies": {
-      "aurelia-binding": "^1.0.0-rc.1.0.0",
-      "aurelia-templating": "^1.0.0-rc.1.0.0",
-      "aurelia-view-manager": "^0.0.7"
+      "aurelia-binding": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-view-manager": "^0.1.0"
     },
     "devDependencies": {
       "aurelia-bootstrapper": "^1.0.0",
@@ -54,9 +54,9 @@
     }
   },
   "dependencies": {
-    "aurelia-binding": "^1.0.0-rc.1.0.0",
-    "aurelia-templating": "^1.0.0-rc.1.0.0",
-    "aurelia-view-manager": "^0.0.7"
+    "aurelia-binding": "^1.0.0",
+    "aurelia-templating": "^1.0.0",
+    "aurelia-view-manager": "^0.1.0"
   },
   "devDependencies": {
     "aurelia-tools": "^0.2.3",
