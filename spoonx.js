@@ -63,5 +63,12 @@ module.exports = {
     /* default options overwrites for karma
      * karma: {browsers: ['Chrome']}
      */
+    karma: {
+      jspm: {
+        // Edit this to your needs
+        loadFiles: ['test/setup.js', 'test/**/*.spec.js'],
+        serveFiles: ['src/**/*', 'test/resources/**/*']
+      }
+    }
   }
 };
