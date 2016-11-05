@@ -45,13 +45,13 @@ export class Pager {
 
   nextPage() {
     if (this.page < this.pages) {
-      this.page++;
+      this.page += 1;
     }
   }
 
   prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
-      this.page--;
+      this.page -= 1;
     }
   }
 
@@ -81,22 +81,22 @@ export class Pager {
     let i;
 
     if (this.page <= this.pagerange) {
-      rangeEnd = Math.min(this.pagerange * 2 + 1, this.pages);
+      rangeEnd = Math.min((this.pagerange * 2) + 1, this.pages);
     }
 
     if (this.page > (this.pages - this.pagerange)) {
       if (this.pages <= (this.pagerange * 2)) {
         rangeStart = 1;
       } else {
-        rangeStart = Math.max(this.pages - this.pagerange * 2, this.pagerange);
+        rangeStart = Math.max(this.pages - (this.pagerange * 2), this.pagerange);
       }
     }
 
-    for (i = rangeStart; i < rangeEnd + 1; i++) {
+    for (i = rangeStart; i < rangeEnd + 1; i += 1) {
       navs.push({
-        text: i.toString(),
+        text   : i.toString(),
         current: i === this.page,
-        load: page => {
+        load   : page => {
           this.page = parseInt(page, 10);
         }
       });
@@ -111,6 +111,7 @@ export class Pager {
   _calculatePages() {
     if (Array.isArray(this.resource)) {
       this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+
       return this.goToPage(1);
     }
 
@@ -118,7 +119,8 @@ export class Pager {
       this.resourceCount = result.count;
       this.pages         = Math.ceil(result.count / this.limit) || 1;
       this.goToPage(1);
-    }).catch(error => {
+    })
+    .catch(error => {
       console.error('Something went wrong.', error);
     });
   }
