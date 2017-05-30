@@ -88,6 +88,10 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
       this._calculateRange();
     };
 
+    Pager.prototype.pagesChanged = function pagesChanged() {
+      this.reloadCount();
+    };
+
     Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.goToPage(newValue);
@@ -102,13 +106,13 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
 
     Pager.prototype.nextPage = function nextPage() {
       if (this.page < this.pages) {
-        this.page++;
+        this.page += 1;
       }
     };
 
     Pager.prototype.prevPage = function prevPage() {
       if (this.page > 1 && this.page <= this.pages) {
-        this.page--;
+        this.page -= 1;
       }
     };
 
@@ -148,7 +152,7 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
         }
       }
 
-      for (i = rangeStart; i < rangeEnd + 1; i++) {
+      for (i = rangeStart; i < rangeEnd + 1; i += 1) {
         navs.push({
           text: i.toString(),
           current: i === this.page,
@@ -166,6 +170,7 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
 
       if (Array.isArray(this.resource)) {
         this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+
         return this.goToPage(1);
       }
 

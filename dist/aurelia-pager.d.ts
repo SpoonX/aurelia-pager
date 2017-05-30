@@ -17,6 +17,7 @@ export declare class Pager {
   // total amount of pages
   attached(): any;
   reloadCount(): any;
+  pagesChanged(): any;
   pageChanged(newValue?: any, oldValue?: any): any;
   criteriaChanged(newValue?: any, oldValue?: any): any;
   nextPage(): any;

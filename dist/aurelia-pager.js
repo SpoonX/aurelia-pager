@@ -1,5 +1,6 @@
-import {Pager} from './pager';
 import {Config} from 'aurelia-view-manager';
+
+import {Pager} from './pager';
 
 // added for bundling
 // eslint-disable-line no-unused-vars

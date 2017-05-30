@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.configure = configure;
 
-var _pager = require('./pager');
-
 var _aureliaViewManager = require('aurelia-view-manager');
+
+var _pager = require('./pager');
 
 function configure(aurelia) {
   aurelia.container.get(_aureliaViewManager.Config).configureNamespace('aurelia-pager', {

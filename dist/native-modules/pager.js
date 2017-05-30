@@ -1,4 +1,15 @@
+'use strict';
+
+exports.__esModule = true;
+exports.Pager = undefined;
+
 var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
+
+var _aureliaBinding = require('aurelia-binding');
+
+var _aureliaTemplating = require('aurelia-templating');
+
+var _aureliaViewManager = require('aurelia-view-manager');
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -45,11 +56,7 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { bindingMode } from 'aurelia-binding';
-import { bindable, customElement } from 'aurelia-templating';
-import { resolvedView } from 'aurelia-view-manager';
-
-export var Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia-pager', 'pager'), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
+var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
   function Pager() {
     
 
@@ -84,6 +91,10 @@ export var Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
     this._calculateRange();
   };
 
+  Pager.prototype.pagesChanged = function pagesChanged() {
+    this.reloadCount();
+  };
+
   Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
@@ -98,13 +109,13 @@ export var Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
 
   Pager.prototype.nextPage = function nextPage() {
     if (this.page < this.pages) {
-      this.page++;
+      this.page += 1;
     }
   };
 
   Pager.prototype.prevPage = function prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
-      this.page--;
+      this.page -= 1;
     }
   };
 
@@ -144,7 +155,7 @@ export var Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
       }
     }
 
-    for (i = rangeStart; i < rangeEnd + 1; i++) {
+    for (i = rangeStart; i < rangeEnd + 1; i += 1) {
       navs.push({
         text: i.toString(),
         current: i === this.page,
@@ -162,6 +173,7 @@ export var Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
 
     if (Array.isArray(this.resource)) {
       this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+
       return this.goToPage(1);
     }
 
@@ -175,35 +187,35 @@ export var Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
   };
 
   return Pager;
-}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, bindable], {
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_dec3, _aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 1;
   }
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'resourceCount', [bindable], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'resourceCount', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 0;
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'pagerange', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 3;
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [bindable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'limit', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 30;
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'criteria', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return {};
   }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'resource', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);

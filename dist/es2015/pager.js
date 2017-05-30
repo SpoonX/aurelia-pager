@@ -80,6 +80,10 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
     this._calculateRange();
   }
 
+  pagesChanged() {
+    this.reloadCount();
+  }
+
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
@@ -94,13 +98,13 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
 
   nextPage() {
     if (this.page < this.pages) {
-      this.page++;
+      this.page += 1;
     }
   }
 
   prevPage() {
     if (this.page > 1 && this.page <= this.pages) {
-      this.page--;
+      this.page -= 1;
     }
   }
 
@@ -138,7 +142,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
       }
     }
 
-    for (i = rangeStart; i < rangeEnd + 1; i++) {
+    for (i = rangeStart; i < rangeEnd + 1; i += 1) {
       navs.push({
         text: i.toString(),
         current: i === this.page,
@@ -154,6 +158,7 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
   _calculatePages() {
     if (Array.isArray(this.resource)) {
       this.pages = Math.ceil(this.resource.length / this.limit) || 1;
+
       return this.goToPage(1);
     }
 
