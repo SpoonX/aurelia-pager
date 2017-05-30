@@ -30,7 +30,7 @@ export class Pager {
 
     this._calculateRange();
   }
-   
+
   pagesChanged() {
     this.reloadCount();
   }
