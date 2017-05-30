@@ -31,6 +31,10 @@ export class Pager {
     this._calculateRange();
   }
 
+  pagesChanged() {
+    this.reloadCount();
+  }
+
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
