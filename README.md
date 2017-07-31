@@ -61,6 +61,53 @@ Run `npm i aurelia-pager --save` from your project root.
 
 And add `aurelia-pager` in the `coreBundles.aurelia` section of your `webpack.config.js`.
 
+### Webpack - aurelia-pal
+
+If your project is using PLATFORM.moduleName. Then you will need to register the plugin as follows.
+
+`aurelia.use.plugin(PLATFORM.moduleName('aurelia-pager'));`
+
+In your webpack.config.js you will need to add an import. By default the import looks like this
+
+`const { AureliaPlugin } = require('aurelia-webpack-plugin');`
+
+You need to change it as follows
+
+`const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');`
+
+Next find the plugins export which currently looks like this
+```
+plugins: [
+    new AureliaPlugin(),
+    new ProvidePlugin({
+      'Promise': 'bluebird',
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery'
+    })...
+```
+
+You can then add the following
+```
+    new ModuleDependenciesPlugin({
+      "aurelia-pager": ['./bootstrap/pager.html', './pager']
+    })...
+```
+The plugins export would now looks something like this
+```
+plugins: [
+    new AureliaPlugin(),
+    new ProvidePlugin({
+      'Promise': 'bluebird',
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery'
+    }),
+    new ModuleDependenciesPlugin({
+      "aurelia-pager": ['./bootstrap/pager.html', './pager']
+    })...
+```
+
 ### Typescript
 
 Npm-based installations pick up the typings automatically. For Jspm-based installations, run `typings i github:spoonx/aurelia-pager` or add `"aurelia-pager": "github:spoonx/aurelia-pager",` to your `typings.json` and run `typings i`.
