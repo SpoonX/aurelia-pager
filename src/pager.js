@@ -14,6 +14,7 @@ export class Pager {
   @bindable criteria      = {}; // search criteria for DB resource
   @bindable resource;           // data resource, either a ORM or a array
   @bindable pages;              // total amount of pages
+  @bindable onPageChanged;      // optional event to call when page value changes
 
   attached() {
     if (!this.page) {
@@ -38,6 +39,9 @@ export class Pager {
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
+	  if (this.onPageChanged !== null) {
+        this.onPageChanged(newValue, oldValue);
+      }
     }
   }
 
