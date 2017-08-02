@@ -51,7 +51,7 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
-  var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
+  var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8;
 
   var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager'), _dec2 = (0, _aureliaViewManager.resolvedView)('aurelia-pager', 'pager'), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
     function Pager() {
@@ -70,6 +70,8 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
       _initDefineProp(this, 'resource', _descriptor6, this);
 
       _initDefineProp(this, 'pages', _descriptor7, this);
+
+      _initDefineProp(this, 'onPageChanged', _descriptor8, this);
     }
 
     Pager.prototype.attached = function attached() {
@@ -95,6 +97,10 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
     Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.goToPage(newValue);
+
+        if (typeof this.onPageChanged === 'function') {
+          this.onPageChanged(newValue, oldValue);
+        }
       }
     };
 
@@ -213,6 +219,9 @@ define(['exports', 'aurelia-binding', 'aurelia-templating', 'aurelia-view-manage
     enumerable: true,
     initializer: null
   }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onPageChanged', [_aureliaTemplating.bindable], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class) || _class);

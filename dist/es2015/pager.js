@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -62,6 +62,8 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
     _initDefineProp(this, 'resource', _descriptor6, this);
 
     _initDefineProp(this, 'pages', _descriptor7, this);
+
+    _initDefineProp(this, 'onPageChanged', _descriptor8, this);
   }
 
   attached() {
@@ -87,6 +89,10 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
+
+      if (typeof this.onPageChanged === 'function') {
+        this.onPageChanged(newValue, oldValue);
+      }
     }
   }
 
@@ -199,6 +205,9 @@ export let Pager = (_dec = customElement('pager'), _dec2 = resolvedView('aurelia
   enumerable: true,
   initializer: null
 }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onPageChanged', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Pager = undefined;
 
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8;
 
 var _aureliaBinding = require('aurelia-binding');
 
@@ -75,6 +75,8 @@ var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager
     _initDefineProp(this, 'resource', _descriptor6, this);
 
     _initDefineProp(this, 'pages', _descriptor7, this);
+
+    _initDefineProp(this, 'onPageChanged', _descriptor8, this);
   }
 
   Pager.prototype.attached = function attached() {
@@ -100,6 +102,10 @@ var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager
   Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
+
+      if (typeof this.onPageChanged === 'function') {
+        this.onPageChanged(newValue, oldValue);
+      }
     }
   };
 
@@ -218,6 +224,9 @@ var Pager = exports.Pager = (_dec = (0, _aureliaTemplating.customElement)('pager
   enumerable: true,
   initializer: null
 }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [_aureliaTemplating.bindable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onPageChanged', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);

@@ -13,8 +13,9 @@ export declare class Pager {
   criteria: any;
   resource: any;
   pages: any;
+  onPageChanged: any;
   
-  // total amount of pages
+  // optional event to call when page value changes
   attached(): any;
   reloadCount(): any;
   pagesChanged(): any;

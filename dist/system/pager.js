@@ -3,7 +3,7 @@
 System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'], function (_export, _context) {
   "use strict";
 
-  var bindingMode, bindable, customElement, resolvedView, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, Pager;
+  var bindingMode, bindable, customElement, resolvedView, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, Pager;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -77,6 +77,8 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
           _initDefineProp(this, 'resource', _descriptor6, this);
 
           _initDefineProp(this, 'pages', _descriptor7, this);
+
+          _initDefineProp(this, 'onPageChanged', _descriptor8, this);
         }
 
         Pager.prototype.attached = function attached() {
@@ -102,6 +104,10 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
         Pager.prototype.pageChanged = function pageChanged(newValue, oldValue) {
           if (newValue !== oldValue) {
             this.goToPage(newValue);
+
+            if (typeof this.onPageChanged === 'function') {
+              this.onPageChanged(newValue, oldValue);
+            }
           }
         };
 
@@ -220,6 +226,9 @@ System.register(['aurelia-binding', 'aurelia-templating', 'aurelia-view-manager'
         enumerable: true,
         initializer: null
       }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'pages', [bindable], {
+        enumerable: true,
+        initializer: null
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onPageChanged', [bindable], {
         enumerable: true,
         initializer: null
       })), _class2)) || _class) || _class));
