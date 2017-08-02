@@ -39,8 +39,8 @@ export class Pager {
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
       this.goToPage(newValue);
-	  if (this.onPageChanged !== null) {
-        this.onPageChanged(newValue, oldValue);
+	    if (this.onPageChanged === 'function') {
+          this.onPageChanged(newValue, oldValue);
       }
     }
   }
