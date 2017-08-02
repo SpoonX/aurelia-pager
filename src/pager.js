@@ -38,11 +38,11 @@ export class Pager {
 
   pageChanged(newValue, oldValue) {
     if (newValue !== oldValue) {
-        this.goToPage(newValue);
+      this.goToPage(newValue);
 
-        if (typeof this.onPageChanged === 'function') {
-            this.onPageChanged(newValue, oldValue);
-        }
+      if (typeof this.onPageChanged === 'function') {
+        this.onPageChanged(newValue, oldValue);
+      }
     }
   }
 
