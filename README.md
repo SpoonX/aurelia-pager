@@ -136,6 +136,13 @@ Range is 3: `2  3  4  [5]  6  7 8`, `[1] 2  3  4  5  6  7`
 
 The amount of displaying is `range` * 2 + `current page`
 
+#### onPageChanged (optional)
+
+This will be called when the page value changes.
+The function should match the signature.
+
+`HandlePageChanged(newValue, oldValue);`
+
 ##### limit (optional)
 
 This will set the amount of items on a page and will be used to calculate the amount of pages, default is 30.
