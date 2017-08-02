@@ -36,15 +36,15 @@ export class Pager {
     this.reloadCount();
   }
 
-    pageChanged(newValue, oldValue) {
-        if (newValue !== oldValue) {
-            this.goToPage(newValue);
+  pageChanged(newValue, oldValue) {
+    if (newValue !== oldValue) {
+        this.goToPage(newValue);
 
-            if (typeof this.onPageChanged === 'function') {
-                this.onPageChanged(newValue, oldValue);
-            }
+        if (typeof this.onPageChanged === 'function') {
+            this.onPageChanged(newValue, oldValue);
         }
     }
+  }
 
   criteriaChanged(newValue, oldValue) {
     if (this.resource && (newValue !== oldValue)) {
